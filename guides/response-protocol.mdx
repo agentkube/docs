@@ -1,0 +1,287 @@
+---
+title: 'Response Protocol'
+description: 'Complete guide for creating and managing Response Protocol'
+---
+
+Response Protocols are defined using YAML files that describe a sequence of steps for handling system operations, incidents, or alerts. This documentation explains the structure and components of a Response Protocol YAML file.
+
+<Tip>
+Response Protocols can be created in two ways:
+
+1. **YAML File Import**: Create and import YAML files following the structure defined in this documentation
+2. **Agentkube Dashboard**: Use the intuitive web interface in the Agentkube dashboard to create and manage protocols without writing YAML manually
+</Tip>
+
+This guide focuses on the YAML file structure for users who prefer to create or manage protocols programmatically.
+
+## File Structure
+
+### Root Level Properties
+
+<ResponseField name="name" type="string" required>
+  The name of the response protocol
+</ResponseField>
+
+<ResponseField name="description" type="string" required>
+  A detailed description of the protocol's purpose
+</ResponseField>
+
+<ResponseField name="steps" type="array" required>
+  An array of step objects defining the protocol workflow
+</ResponseField>
+
+### Step Object Properties
+
+Each step in the `steps` array has the following properties:
+
+<ResponseField name="title" type="string" required>
+  The title of the step
+</ResponseField>
+
+<ResponseField name="number" type="integer" required>
+  The step number (must be unique and sequential)
+</ResponseField>
+
+<ResponseField name="details" type="string">
+  Detailed description of the step
+</ResponseField>
+
+<ResponseField name="commands" type="array" required>
+  Array of command objects to be executed
+</ResponseField>
+
+<ResponseField name="nextSteps" type="array">
+  Array of next step objects defining workflow transitions
+</ResponseField>
+
+### Command Object Properties
+
+Each command in the `commands` array has the following properties:
+
+<ResponseField name="format" type="string" required>
+  The actual command to be executed
+</ResponseField>
+
+<ResponseField name="docString" type="string">
+  Documentation describing the command's purpose
+</ResponseField>
+
+<ResponseField name="example" type="string">
+  Example usage of the command
+</ResponseField>
+
+<ResponseField name="readOnly" type="boolean">
+  If true, command cannot be modified (default: false)
+</ResponseField>
+
+### NextStep Object Properties
+
+Each object in the `nextSteps` array has the following properties:
+
+<ResponseField name="referenceType" type="string" required>
+  Type of reference: "STEP", "FINAL", or "STOP"
+</ResponseField>
+
+<ResponseField name="targetStepNumber" type="integer">
+  Required when referenceType is "STEP"
+</ResponseField>
+
+<ResponseField name="conditions" type="array">
+  Array of condition strings
+</ResponseField>
+
+<ResponseField name="isUnconditional" type="boolean">
+  If true, conditions are ignored (default: false)
+</ResponseField>
+
+## Reference Types
+
+<Card>
+The `referenceType` field can have one of three values:
+
+- `STEP`: Proceed to another step (requires targetStepNumber)
+- `FINAL`: End the protocol successfully
+- `STOP`: Terminate the protocol
+</Card>
+
+## Conditions
+
+<Note>
+Conditions are JavaScript-like expressions that determine when a next step should be taken. Examples:
+
+- `severity === 'critical'`
+- `teamResponded === true`
+- `autoResolution === true`
+</Note>
+
+## Example Usage
+
+<CodeGroup>
+```yaml Example Protocol
+name: Cluster Namespace Check
+description: Protocol for reviewing cluster namespaces
+steps:
+  - title: Get Application Namespace
+    number: 1
+    commands:
+      - docString: List all namespaces
+        example: 'Check if agentkube namespace exists'
+        format: kubectl get namespaces
+        readOnly: true
+    details: Get all the relevant namespaces.
+    nextSteps:
+      - referenceType: STEP
+        targetStepNumber: 2
+        conditions:
+          - severity === 'critical'
+        isUnconditional: false
+```
+</CodeGroup>
+
+## Best Practices
+
+### Step Numbers
+
+<Steps>
+  <Step title="Sequential Numbering">
+    Use sequential numbers starting from 1
+  </Step>
+  <Step title="Uniqueness">
+    Ensure numbers are unique within the protocol
+  </Step>
+</Steps>
+
+### Commands
+
+<Steps>
+  <Step title="Documentation">
+    Use clear, descriptive docStrings
+  </Step>
+  <Step title="Examples">
+    Provide meaningful examples
+  </Step>
+  <Step title="Access Control">
+    Mark commands as readOnly if they shouldn't be modified
+  </Step>
+</Steps>
+
+### Next Steps
+
+<Steps>
+  <Step title="Flow Definition">
+    Always define at least one next step unless it's the final step
+  </Step>
+  <Step title="Conditions">
+    Use clear, testable conditions
+  </Step>
+  <Step title="Terminal States">
+    Consider using FINAL or STOP types for terminal steps
+  </Step>
+</Steps>
+
+### Documentation
+
+<Steps>
+  <Step title="Details">
+    Include detailed descriptions
+  </Step>
+  <Step title="Steps">
+    Provide clear step details
+  </Step>
+  <Step title="Requirements">
+    Document any prerequisites or requirements
+  </Step>
+</Steps>
+
+## Common Workflow Patterns
+
+### Linear Workflow
+
+<CodeGroup>
+```yaml Linear Flow
+nextSteps:
+  - referenceType: STEP
+    targetStepNumber: 2
+    isUnconditional: true
+```
+</CodeGroup>
+
+### Conditional Branching
+
+<CodeGroup>
+```yaml Conditional Flow
+nextSteps:
+  - referenceType: STEP
+    targetStepNumber: 2
+    conditions:
+      - severity === 'critical'
+  - referenceType: FINAL
+    conditions:
+      - severity === 'low'
+```
+</CodeGroup>
+
+### Terminal Step
+
+<CodeGroup>
+```yaml Terminal Step
+nextSteps:
+  - referenceType: STOP
+    conditions:
+      - documentationComplete === true
+    isUnconditional: true
+```
+</CodeGroup>
+
+## Error Handling
+
+<Card title="YAML Parser Validation">
+The YAML parser validates:
+
+- Required fields are present
+- Field types are correct
+- Step numbers are unique
+- Referenced steps exist
+- Reference types are valid
+</Card>
+
+<Warning>
+Common errors to watch for:
+
+1. Missing required fields
+2. Invalid reference types
+3. Missing target step numbers for STEP references
+4. Duplicate step numbers
+5. Invalid YAML syntax
+</Warning>
+
+## Schema Validation
+
+<Note>
+It's recommended to validate your YAML files against the schema before importing. The schema enforces:
+
+- Required fields
+- Field types
+- Enumerated values
+- Relationship constraints
+</Note>
+
+## Testing
+
+<Steps>
+  <Step title="Syntax Validation">
+    Validate YAML syntax
+  </Step>
+  <Step title="Path Testing">
+    Test all possible paths through the workflow
+  </Step>
+  <Step title="Condition Verification">
+    Verify conditions work as expected
+  </Step>
+  <Step title="Command Testing">
+    Check command execution
+  </Step>
+  <Step title="Error Handling">
+    Validate error handling
+  </Step>
+</Steps>
