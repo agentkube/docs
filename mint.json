@@ -58,6 +58,13 @@
       ]
     },
     {
+      "group": "Guides",
+      "pages": [
+        "guides/response-protocol",
+        "guides/investigation"
+      ]
+    },
+    {
       "group": "Essentials",
       "pages": [
         "essentials/markdown",
