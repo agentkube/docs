@@ -1,86 +1,126 @@
 ---
 title: 'Quickstart'
-description: 'Start building awesome documentation in under 5 minutes'
+description: 'Get started with AgentKube Operator in minutes'
 ---
 
-## Setup your development
+## Overview
 
-Learn how to update your docs locally and deploy them to the public.
+AgentKube Operator is a Kubernetes operator that enables seamless integration with the AgentKube platform for enhanced cluster management and monitoring capabilities. This guide will help you get started with installing and configuring the operator using Helm charts.
 
-### Edit and preview
+## Prerequisites
+
+Before you begin, ensure you have:
 
 <AccordionGroup>
-  <Accordion icon="github" title="Clone your docs locally">
-    During the onboarding process, we created a repository on your Github with
-    your docs content. You can find this repository on our
-    [dashboard](https://dashboard.mintlify.com). To clone the repository
-    locally, follow these
-    [instructions](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
-    in your terminal.
+  <Accordion icon="cube" title="Kubernetes Environment">
+    - Kubernetes cluster version 1.16 or higher
+    - Kubectl configured with access to your cluster
+    - Helm 3.x installed on your local machine
   </Accordion>
-  <Accordion icon="rectangle-terminal" title="Preview changes">
-    Previewing helps you make sure your changes look as intended. We built a
-    command line interface to render these changes locally. 1. Install the
-    [Mintlify CLI](https://www.npmjs.com/package/mintlify) to preview the
-    documentation changes locally with this command: ``` npm i -g mintlify ```
-    2. Run the following command at the root of your documentation (where
-    `mint.json` is): ``` mintlify dev ```
+  <Accordion icon="key" title="AgentKube Access">
+    - Valid AgentKube API key (You'll generate this in the next section)
+    - Access to AgentKube Dashboard
   </Accordion>
 </AccordionGroup>
 
-### Deploy your changes
+## Installation Steps
 
-<AccordionGroup>
+### Generate API Key
 
-<Accordion icon="message-bot" title="Install our Github app">
-  Our Github app automatically deploys your changes to your docs site, so you
-  don't need to manage deployments yourself. You can find the link to install on
-  your [dashboard](https://dashboard.mintlify.com). Once the bot has been
-  successfully installed, there should be a check mark next to the commit hash
-  of the repo.
-</Accordion>
-<Accordion icon="rocket" title="Push your changes">
-  [Commit and push your changes to
-  Git](https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository#about-git-push)
-  for your changes to update in your docs site. If you push and don't see that
-  the Github app successfully deployed your changes, you can also manually
-  update your docs through our [dashboard](https://dashboard.mintlify.com).
-</Accordion>
+<Steps>
+  <Step title="Access Dashboard">
+    Navigate to [dashboard.agentkube.com](https://dashboard.agentkube.com)
+  </Step>
+  <Step title="Create API Key">
+    Go to Settings > API Keys and generate a new key
+  </Step>
+  <Step title="Save Key">
+    Store your API key securely - you'll need it for the installation
+  </Step>
+</Steps>
 
-</AccordionGroup>
+### Install the Operator
 
-## Update your docs
+First, add the AgentKube Helm repository and update:
 
-Add content directly in your files with MDX syntax and React components. You can use any of our components, or even build your own.
+```bash
+helm repo add agentkube https://agentkube.github.io/helm-charts
+helm repo update
+```
+
+Then install the operator using Helm:
+
+```bash
+helm install agentkube-operator agentkube/agentkube-operator-charts \
+  -n agentkube-operator-system \
+  --create-namespace \
+  --set manager.apikey=your_api_key_here \
+  --set manager.clusterName=your_cluster_name
+```
+
+<Note>
+  Replace `your_api_key_here` with your actual API key and `your_cluster_name` with your desired cluster identifier.
+</Note>
+
+## Configuration
+
+<ResponseField name="Configuration Parameters" type="Configuration">
+  The following parameters can be configured during installation:
+
+  <ParamField name="manager.serverEndpoint" type="string" default="https://api.agentkube.com">
+    AgentKube Server Endpoint
+  </ParamField>
+  <ParamField name="manager.apikey" type="string" required>
+    Your AgentKube API Key
+  </ParamField>
+  <ParamField name="manager.clusterName" type="string" default="local_cluster">
+    Name to identify your cluster
+  </ParamField>
+  <ParamField name="manager.readonly" type="boolean" default="true">
+    Enable/disable read-only mode
+  </ParamField>
+  <ParamField name="replicaCount" type="number" default="1">
+    Number of operator replicas
+  </ParamField>
+</ResponseField>
+
+### Example Configuration
+
+Create a `values.yaml` file with your custom configuration:
+
+```yaml
+manager:
+  serverEndpoint: https://api.agentkube.com
+  apikey: your_api_key_here
+  clusterName: prod-cluster
+  readonly: false
+```
+
+## Verification
+
+To verify the installation:
+
+```bash
+kubectl get pods -n agentkube-operator-system
+```
+
+For local development and testing, you can access the operator's API:
+
+```bash
+kubectl port-forward -n agentkube-operator-system svc/agentkube-operator-controller 8082:8082
+```
 
 <CardGroup>
-
-<Card title="Style Your Docs" icon="paintbrush" href="/settings/global">
-  Add flair to your docs with personalized branding.
-</Card>
-
-<Card
-  title="Add API Endpoints"
-  icon="square-code"
-  href="/api-playground/configuration"
->
-  Implement your OpenAPI spec and enable API user interaction.
-</Card>
-
-<Card
-  title="Integrate Analytics"
-  icon="chart-mixed"
-  href="/analytics/supported-integrations"
->
-  Draw insights from user interactions with your documentation.
-</Card>
-
-<Card
-  title="Host on a Custom Domain"
-  icon="browser"
-  href="/settings/custom-domain/subdomain"
->
-  Keep your docs on your own website's subdomain.
-</Card>
-
+  <Card title="View Metrics" icon="chart-line" href="https://dashboard.agentkube.com">
+    Access your cluster metrics on the AgentKube Dashboard
+  </Card>
+  <Card title="Configuration Guide" icon="gear" href="/configuration">
+    Learn about advanced configuration options
+  </Card>
+  <Card title="Troubleshooting" icon="wrench" href="/troubleshooting">
+    Common issues and their solutions
+  </Card>
+  <Card title="API Reference" icon="code" href="/api-reference">
+    Explore the AgentKube API documentation
+  </Card>
 </CardGroup>
