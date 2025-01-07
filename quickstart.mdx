@@ -55,7 +55,7 @@ helm repo update
 Then install the operator using Helm:
 
 ```bash
-helm install agentkube-operator agentkube/agentkube-operator-charts \
+helm install agentkube-operator agentkube/agentkube-operator \
   -n agentkube-operator-system \
   --create-namespace \
   --set manager.apikey=your_api_key_here \

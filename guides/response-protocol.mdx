@@ -112,34 +112,38 @@ The `referenceType` field can have one of three values:
 ## Conditions
 
 <Note>
-Conditions are JavaScript-like expressions that determine when a next step should be taken. Examples:
+Conditions are expressions that determine when a next step should be taken. In the Kubernetes example, conditions are written in natural language for clarity:
 
-- `severity === 'critical'`
-- `teamResponded === true`
-- `autoResolution === true`
+- "If any pods are in CrashLoopBackOff status, investigate pod logs"
+- "If LoadBalancer services show pending external IPs, check cloud provider integration"
+- "If all resources are healthy and properly configured"
 </Note>
 
 ## Example Usage
 
 <CodeGroup>
 ```yaml Example Protocol
-name: Cluster Namespace Check
-description: Protocol for reviewing cluster namespaces
+name: Kubernetes Resource Health Check Protocol
+description: A comprehensive protocol to check the health and status of Kubernetes resources across namespaces
 steps:
-  - title: Get Application Namespace
+  - title: List All Namespaces
     number: 1
+    details: Get an overview of all namespaces in the cluster to identify the scope of investigation
     commands:
-      - docString: List all namespaces
-        example: 'Check if agentkube namespace exists'
+      - docString: Lists all namespaces in the cluster with their status and age
+        example: kubectl get ns --sort-by=.metadata.creationTimestamp
         format: kubectl get namespaces
-        readOnly: true
-    details: Get all the relevant namespaces.
-    nextSteps:
-      - referenceType: STEP
-        targetStepNumber: 2
-        conditions:
-          - severity === 'critical'
-        isUnconditional: false
+        readOnly: false
+    nextSteps: []
+
+  - title: Check Pods Across All Namespaces
+    number: 2
+    details: Inspect pod status across all namespaces to identify any issues
+    commands:
+      - docString: Displays all pods across namespaces with their status, restarts, and age
+        example: kubectl get pods -A --sort-by='.status.containerStatuses[0].restartCount'
+        format: kubectl get pods -A
+        readOnly: false
 ```
 </CodeGroup>
 
@@ -149,7 +153,7 @@ steps:
 
 <Steps>
   <Step title="Sequential Numbering">
-    Use sequential numbers starting from 1
+    Use sequential numbers starting from 1, as shown in the Kubernetes example (1 through 4)
   </Step>
   <Step title="Uniqueness">
     Ensure numbers are unique within the protocol
@@ -160,13 +164,16 @@ steps:
 
 <Steps>
   <Step title="Documentation">
-    Use clear, descriptive docStrings
+    Use clear, descriptive docStrings that explain the command's purpose
   </Step>
   <Step title="Examples">
-    Provide meaningful examples
+    Provide practical examples with useful flags, like sorting and output formatting:
+    ```bash
+    kubectl get pods -A --sort-by='.status.containerStatuses[0].restartCount'
+    ```
   </Step>
   <Step title="Access Control">
-    Mark commands as readOnly if they shouldn't be modified
+    Use readOnly flag appropriately to control command modification
   </Step>
 </Steps>
 
@@ -174,27 +181,13 @@ steps:
 
 <Steps>
   <Step title="Flow Definition">
-    Always define at least one next step unless it's the final step
+    Define clear transitions between steps using conditions
   </Step>
   <Step title="Conditions">
-    Use clear, testable conditions
+    Use clear, actionable conditions that guide the operator
   </Step>
   <Step title="Terminal States">
-    Consider using FINAL or STOP types for terminal steps
-  </Step>
-</Steps>
-
-### Documentation
-
-<Steps>
-  <Step title="Details">
-    Include detailed descriptions
-  </Step>
-  <Step title="Steps">
-    Provide clear step details
-  </Step>
-  <Step title="Requirements">
-    Document any prerequisites or requirements
+    Include both FINAL (success) and STOP (critical issues) states
   </Step>
 </Steps>
 
@@ -217,12 +210,12 @@ nextSteps:
 ```yaml Conditional Flow
 nextSteps:
   - referenceType: STEP
-    targetStepNumber: 2
+    targetStepNumber: 3
     conditions:
-      - severity === 'critical'
-  - referenceType: FINAL
+      - If all pods are Running and healthy, proceed to check services
+  - referenceType: STOP
     conditions:
-      - severity === 'low'
+      - Critical issues found requiring immediate attention
 ```
 </CodeGroup>
 
@@ -231,10 +224,10 @@ nextSteps:
 <CodeGroup>
 ```yaml Terminal Step
 nextSteps:
-  - referenceType: STOP
+  - referenceType: FINAL
     conditions:
-      - documentationComplete === true
-    isUnconditional: true
+      - All resources are healthy and properly configured
+    isUnconditional: false
 ```
 </CodeGroup>
 
@@ -260,17 +253,6 @@ Common errors to watch for:
 5. Invalid YAML syntax
 </Warning>
 
-## Schema Validation
-
-<Note>
-It's recommended to validate your YAML files against the schema before importing. The schema enforces:
-
-- Required fields
-- Field types
-- Enumerated values
-- Relationship constraints
-</Note>
-
 ## Testing
 
 <Steps>
@@ -278,15 +260,15 @@ It's recommended to validate your YAML files against the schema before importing
     Validate YAML syntax
   </Step>
   <Step title="Path Testing">
-    Test all possible paths through the workflow
-  </Step>
-  <Step title="Condition Verification">
-    Verify conditions work as expected
+    Test all possible paths through the workflow:
+    - Normal flow (all healthy)
+    - Error conditions (pod crashes, service issues)
+    - Terminal conditions (both FINAL and STOP)
   </Step>
   <Step title="Command Testing">
-    Check command execution
+    Verify all kubectl commands work as expected
   </Step>
   <Step title="Error Handling">
-    Validate error handling
+    Test error scenarios and condition handling
   </Step>
 </Steps>
