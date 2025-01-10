@@ -4,15 +4,14 @@ description: 'Get started with AgentKube Operator in minutes'
 ---
 
 ## Overview
-
 AgentKube Operator is a Kubernetes operator that enables seamless integration with the AgentKube platform for enhanced cluster management and monitoring capabilities. This guide will help you get started with installing and configuring the operator using Helm charts.
 
 <img
   src="/images/overview.png"
   alt="Hero Dark"
 />
-## Prerequisites
 
+## Prerequisites
 Before you begin, ensure you have:
 
 <AccordionGroup>
@@ -30,7 +29,6 @@ Before you begin, ensure you have:
 ## Installation Steps
 
 ### Generate API Key
-
 <Steps>
   <Step title="Access Dashboard">
     Navigate to [dashboard.agentkube.com](https://dashboard.agentkube.com)
@@ -44,16 +42,13 @@ Before you begin, ensure you have:
 </Steps>
 
 ### Install the Operator
-
 First, add the AgentKube Helm repository and update:
-
 ```bash
 helm repo add agentkube https://agentkube.github.io/helm-charts
 helm repo update
 ```
 
 Then install the operator using Helm:
-
 ```bash
 helm install agentkube-operator agentkube/agentkube-operator \
   -n agentkube-operator-system \
@@ -70,7 +65,6 @@ helm install agentkube-operator agentkube/agentkube-operator \
 
 <ResponseField name="Configuration Parameters" type="Configuration">
   The following parameters can be configured during installation:
-
   <ParamField name="manager.serverEndpoint" type="string" default="https://api.agentkube.com">
     AgentKube Server Endpoint
   </ParamField>
@@ -89,9 +83,7 @@ helm install agentkube-operator agentkube/agentkube-operator \
 </ResponseField>
 
 ### Example Configuration
-
 Create a `values.yaml` file with your custom configuration:
-
 ```yaml
 manager:
   serverEndpoint: https://api.agentkube.com
@@ -101,18 +93,28 @@ manager:
 ```
 
 ## Verification
-
 To verify the installation:
-
 ```bash
 kubectl get pods -n agentkube-operator-system
 ```
 
-For local development and testing, you can access the operator's API:
-
+You can access the operator's API:
 ```bash
 kubectl port-forward -n agentkube-operator-system svc/agentkube-operator-controller 8082:8082
 ```
+
+After setting up port forwarding, configure the API endpoint in your Agentkube dashboard:
+
+1. Navigate to your cluster in the Agentkube dashboard
+2. Select your associated cluster
+3. Update the external endpoint to `http://localhost:8082`
+4. Enter your API key
+5. Save the configuration to enable communication with the operator
+
+<img
+  src="/images/update-endpoint.png"
+  alt="Hero Dark"
+/>
 
 <CardGroup>
   <Card title="View Metrics" icon="chart-line" href="https://dashboard.agentkube.com">
