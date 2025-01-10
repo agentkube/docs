@@ -1,10 +1,10 @@
 ---
 title: 'Quickstart'
-description: 'Get started with AgentKube Operator in minutes'
+description: 'Get started with Agentkube Operator in minutes'
 ---
 
 ## Overview
-AgentKube Operator is a Kubernetes operator that enables seamless integration with the AgentKube platform for enhanced cluster management and monitoring capabilities. This guide will help you get started with installing and configuring the operator using Helm charts.
+Agentkube Operator is a Kubernetes operator that enables seamless integration with the Agentkube platform for enhanced cluster management and monitoring capabilities. This guide will help you get started with installing and configuring the operator using Helm charts.
 
 <img
   src="/images/overview.png"
@@ -20,9 +20,9 @@ Before you begin, ensure you have:
     - Kubectl configured with access to your cluster
     - Helm 3.x installed on your local machine
   </Accordion>
-  <Accordion icon="key" title="AgentKube Access">
-    - Valid AgentKube API key (You'll generate this in the next section)
-    - Access to AgentKube Dashboard
+  <Accordion icon="key" title="Agentkube Access">
+    - Valid Agentkube API key (You'll generate this in the next section)
+    - Access to Agentkube Dashboard
   </Accordion>
 </AccordionGroup>
 
@@ -42,7 +42,7 @@ Before you begin, ensure you have:
 </Steps>
 
 ### Install the Operator
-First, add the AgentKube Helm repository and update:
+First, add the Agentkube Helm repository and update:
 ```bash
 helm repo add agentkube https://agentkube.github.io/helm-charts
 helm repo update
@@ -66,10 +66,10 @@ helm install agentkube-operator agentkube/agentkube-operator \
 <ResponseField name="Configuration Parameters" type="Configuration">
   The following parameters can be configured during installation:
   <ParamField name="manager.serverEndpoint" type="string" default="https://api.agentkube.com">
-    AgentKube Server Endpoint
+    Agentkube Server Endpoint
   </ParamField>
   <ParamField name="manager.apikey" type="string" required>
-    Your AgentKube API Key
+    Your Agentkube API Key
   </ParamField>
   <ParamField name="manager.clusterName" type="string" default="local_cluster">
     Name to identify your cluster
@@ -118,7 +118,7 @@ After setting up port forwarding, configure the API endpoint in your Agentkube d
 
 <CardGroup>
   <Card title="View Metrics" icon="chart-line" href="https://dashboard.agentkube.com">
-    Access your cluster metrics on the AgentKube Dashboard
+    Access your cluster metrics on the Agentkube Dashboard
   </Card>
   <Card title="Configuration Guide" icon="gear" href="/configuration">
     Learn about advanced configuration options
@@ -127,6 +127,6 @@ After setting up port forwarding, configure the API endpoint in your Agentkube d
     Common issues and their solutions
   </Card>
   <Card title="API Reference" icon="code" href="/api-reference">
-    Explore the AgentKube API documentation
+    Explore the Agentkube API documentation
   </Card>
 </CardGroup>
