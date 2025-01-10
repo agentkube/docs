@@ -3,7 +3,11 @@ title: 'Response Protocol'
 description: 'Complete guide for creating and managing Response Protocol'
 ---
 
-Response Protocols are defined using YAML files that describe a sequence of steps for handling system operations, incidents, or alerts. This documentation explains the structure and components of a Response Protocol YAML file.
+Response Protocols are a sequence of steps designed to handle Kubernetes operations and gain insights into incidents within the cluster. They can be defined through YAML configuration or managed via the Agentkube dashboard. This documentation explains the structure and components of a Response Protocol YAML file.
+
+### Quickstart
+Here’s a quick sample of a Response Protocol that you can import into your Agentkube dashboard to get started. Use this as a foundation to create your own custom protocol based on your cluster’s needs: [Kubernetes Resource Health Check Protocol](https://raw.githubusercontent.com/agentkube/docs/refs/heads/main/examples/health-check-protocol.yaml)
+
 
 <Tip>
 Response Protocols can be created in two ways:
