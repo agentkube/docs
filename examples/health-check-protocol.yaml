@@ -29,7 +29,7 @@ steps:
           - If any pods are in ImagePullBackOff status, check image repository access
           - If any pods show high restart counts (>5), investigate pod stability
           - If all pods are Running and healthy, proceed to check services
-        isUnconditional: false
+        isUnconditional: true
         targetStepNumber: 3
   - title: Check Services Status
     number: 3
