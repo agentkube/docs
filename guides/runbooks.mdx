@@ -1,16 +1,16 @@
 ---
-title: 'Response Protocol'
-description: 'Complete guide for creating and managing Response Protocol'
+title: 'Runbooks'
+description: 'Complete guide for creating and managing runbooks'
 ---
 
-Response Protocols are a sequence of steps designed to handle Kubernetes operations and gain insights into incidents within the cluster. They can be defined through YAML configuration or managed via the Agentkube dashboard. This documentation explains the structure and components of a Response Protocol YAML file.
+Runbookss are a sequence of steps designed to handle Kubernetes operations and gain insights into incidents within the cluster. They can be defined through YAML configuration or managed via the Agentkube dashboard. This documentation explains the structure and components of a Runbooks YAML file.
 
 ### Quickstart
-Here’s a quick sample of a Response Protocol that you can import into your Agentkube dashboard to get started. Use this as a foundation to create your own custom protocol based on your cluster’s needs: [Kubernetes Resource Health Check Protocol](https://raw.githubusercontent.com/agentkube/docs/refs/heads/main/examples/health-check-protocol.yaml)
+Here’s a quick sample of a Runbooks that you can import into your Agentkube dashboard to get started. Use this as a foundation to create your own custom protocol based on your cluster’s needs: [Kubernetes Resource Health Check Protocol](https://raw.githubusercontent.com/agentkube/docs/refs/heads/main/examples/health-check-protocol.yaml)
 
 
 <Tip>
-Response Protocols can be created in two ways:
+Runbookss can be created in two ways:
 
 1. **YAML File Import**: Create and import YAML files following the structure defined in this documentation
 2. **Agentkube Dashboard**: Use the intuitive web interface in the Agentkube dashboard to create and manage protocols without writing YAML manually
@@ -28,7 +28,7 @@ This guide focuses on the YAML file structure for users who prefer to create or 
 ### Root Level Properties
 
 <ResponseField name="name" type="string" required>
-  The name of the response protocol
+  The name of the Runbooks
 </ResponseField>
 
 <ResponseField name="description" type="string" required>
