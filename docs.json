@@ -59,6 +59,12 @@
               "guides/investigation",
               "guides/editor"
             ]
+          },
+          {
+            "group": "Updates",
+            "pages": [
+              "changelog"
+            ]
           }
         ]
       }
