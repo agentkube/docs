@@ -1,0 +1,160 @@
+---
+title: 'MCP Compatibility'
+description: 'Model Context Protocol integration with Agentkube'
+---
+
+# Model Context Protocol (MCP)
+
+MCP is an open protocol that standardizes how applications provide context and tools to LLMs. It allows you to extend Agentkube's capabilities by connecting it to various data sources and tools through standardized interfaces.
+
+## Getting Started with MCP
+
+Agentkube supports MCP servers to enhance its AI agent capabilities. You can connect external tools and data sources to extend functionality beyond basic operations.
+
+<Tip>
+MCP servers act as intermediaries between Agentkube and external tools or data sources, allowing seamless integration with your existing infrastructure.
+</Tip>
+
+
+## MCP on Agentkube Desktop
+
+The MCP integration for Agentkube Desktop provides flexible tool management to enhance your agent's capabilities.
+
+### Things to know about MCP on Agentkube
+
+- Never run MCPs you do not trust - we do not endorse or guarantee the security of any MCPs you may find on the internet
+- Agentkube Desktop supports Tools loading via MCP Servers
+- The more MCP servers you define, the longer it will take for them to start up
+
+### Startup sequence
+
+<Warning>
+Agentkube does not automatically start MCP servers when the application starts to prevent any overloading of resources on boot or unexpected resource consumption.
+</Warning>
+
+## Configuring MCP Servers
+
+You can add MCP servers through the Agentkube desktop app itself or by editing the configuration file located at `~/.agentkube/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "simplefs": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/siddhantprateek/Documents/projects"
+      ],
+      "transport": "stdio",
+      "env": {}
+    }
+  }
+}
+```
+
+### Supported Transport Types
+
+Agentkube supports two transport types for MCP servers:
+
+1. **stdio Transport**
+   - Runs on your local machine
+   - Managed automatically by Agentkube
+   - Communicates directly via stdout
+   - Only accessible by you locally
+   - Input: Valid shell command that is run by Agentkube automatically
+
+2. **SSE Transport**
+   - Can run locally or remotely
+   - Managed and run by you
+   - Communicates over the network
+   - Can be shared across machines
+   - Input: URL to the /sse endpoint of an MCP server external to Agentkube
+
+### Command availability
+
+It is not within the scope of Agentkube to debug when a command is not working or available. In order for the command of any MCP Server to work, you must have the respective command installed on your host machine.
+
+<Note>
+Agentkube does not automatically install the commands for you - you must install them manually and also ensure the command is available in your PATH or the command is a path directly to the binary being used. For example: npx, uv, uvx, node, bash, etc.
+</Note>
+
+## Managing MCP Servers
+
+### Where is the MCP Server configuration file?
+
+The configuration file is automatically created if you open the "MCP" page in the Agentkube UI and it does not exist.
+
+The MCP Server configuration file is located at `~/.agentkube/mcp.json`.
+
+### Reloading MCP Servers
+
+You can reload MCP Servers on the fly by clicking the "Refresh" button in the "MCP" page. This will:
+- Reload the MCP Servers from the configuration file
+- Restart the servers with your changes
+- Not require restarting the Agentkube Desktop application
+
+### Adding and removing MCP Servers
+
+**Adding an MCP Server:**
+1. Add a new tool to the `mcpServers` object in the `~/.agentkube/mcp.json` file, or
+2. Use the "Add MCP Server" option in the `settings > MCP`
+
+**Removing an MCP Server:**
+1. Click the delete icon for respective MCP Server
+2. Or Remove manually from `~/.agentkube/mcp.json`
+
+<Tip>
+Deleting the MCP Server from the UI will remove the MCP Server from the file and kill the process running that MCP Server.
+</Tip>
+
+You can also manually remove an MCP Server by removing the object from the `mcpServers` object in the configuration file and clicking "Refresh" in the "MCP" page afterwards.
+
+## Debugging MCP Servers
+
+If you are having issues with an MCP Server, you can best debug these by looking at the Desktop application logs.
+
+### Viewing the status of an MCP Server
+
+On the "MCP" page, you can view the status of an MCP Server by clicking on the MCP Server in the list - if there is an error, it will be displayed in the card.
+
+Additionally, you can quickly see the status of all MCP Servers by clicking the "MCP" page and looking at the MCP Servers list.
+
+### Issues installing a tool
+
+<Warning>
+Please do not open issues about tool issues on GitHub - we are not the MCP authors or maintainers.
+</Warning>
+
+If you are having issues, you should post on the MCP Discussion board or ask in the Agentkube community channels.
+
+Sometimes, an MCP Server will require a tool to be installed via `uv tool install xyz`. The easiest way to do this is to open a command line and run the command manually on your machine. Then you can click "Refresh" in the "MCP" and see if the tool now boots successfully.
+
+## Limitations
+
+<Warning>
+MCP is a very new protocol and is still in active development. There are some known caveats to be aware of:
+</Warning>
+
+### Tool Quantity
+Some MCP servers, or users with many MCP servers active, may have many tools available for Agentkube to use. Currently, Agentkube will only send the first 40 tools to the Agent.
+
+### Remote Development
+Agentkube directly communicates with MCP servers from your local machine, either directly through `stdio` or via the network using `sse`. Therefore, MCP servers may not work properly when accessing Agentkube over SSH or other development environments. We are hoping to improve this in future releases.
+
+### MCP Resources
+MCP servers offer two main capabilities: tools and resources. Tools are available in Agentkube today, and allow Agentkube to execute the tools offered by an MCP server, and use the output in its further steps. However, resources are not yet supported in Agentkube. We are hoping to add resource support in future releases.
+
+## Common Use Cases
+
+MCP integration enables Agentkube to:
+
+- Query databases directly
+- Access and integrate with documentation systems like Notion
+- Interact with GitHub repositories
+- Maintain memory of previous interactions
+- Connect with service APIs like Stripe
+
+<Tip>
+When your agent uses an MCP tool, you'll see a message asking for your approval. You can expand to see what arguments are being used and review the response in detail.
+</Tip>
