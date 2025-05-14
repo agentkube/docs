@@ -64,6 +64,7 @@
             "group": "Settings",
             "pages": [
               "settings/mcp",
+              "settings/license-key",
               "settings/custom-api"
             ]
           },
