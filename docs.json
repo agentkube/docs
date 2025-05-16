@@ -53,11 +53,12 @@
             ]
           },
           {
-            "group": "Guides",
+            "group": "Feature",
             "pages": [
-              "guides/runbooks",
-              "guides/investigation",
-              "guides/editor"
+              "features/runbooks",
+              "features/investigation",
+              "features/editor",
+              "features/monitoring"
             ]
           },
           {

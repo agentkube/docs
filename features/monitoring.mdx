@@ -1,0 +1,48 @@
+---
+title: 'Monitoring'
+description: 'Kubernetes resource monitoring in Agentkube'
+---
+
+<Note type="warning">
+This feature is currently in development preview. The design and functionality are not yet finalized and will be updated in future releases.
+</Note>
+
+Monitoring in Agentkube provides intuitive visualization and tracking of your Kubernetes cluster metrics, helping you maintain optimal performance and quickly identify potential issues.
+
+<Tip>
+Currently, Monitoring is available in the desktop application as a development preview. We're actively experimenting with new approaches to enhance your monitoring experience.
+</Tip>
+
+Agentkube's Monitoring feature scrapes metrics from Prometheus, giving you visibility into your cluster's health and performance through an intuitive interface designed to simplify Kubernetes observability.
+
+
+## Configuring Prometheus Connection
+
+You can configure the Prometheus monitoring service connection by clicking the Settings icon in the top right corner of the Monitoring page. This allows you to set:
+
+- **Namespace**: The Kubernetes namespace where Prometheus is installed (default: "monitoring")
+- **Service**: The Prometheus service name and port (default: "prometheus:9090")
+
+<img
+  src="/images/proxy-config.png"
+  alt="Proxy Configure"
+/>
+
+
+These connection details affect where pod metrics are queried from and ensure your monitoring dashboard displays accurate, up-to-date information.
+
+
+<Note>
+We welcome your feedback on the Monitoring preview to help us refine and improve this feature before its official release.
+</Note>
+
+## Getting Started with Monitoring
+
+1. Ensure Prometheus is properly configured in your cluster
+2. Open the Monitoring page in Agentkube desktop
+3. Configure the Prometheus connection settings
+4. Explore your cluster metrics through the intuitive dashboard
+
+<Warning>
+As this feature is in development, some functionality may change or be limited in the current preview version.
+</Warning>
