@@ -66,7 +66,8 @@
             "pages": [
               "settings/mcp",
               "settings/license-key",
-              "settings/custom-api"
+              "settings/custom-api",
+              "settings/watcher"
             ]
           },
           {

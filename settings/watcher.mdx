@@ -1,0 +1,268 @@
+---
+title: 'Watcher'
+description: 'Monitor Kubernetes clusters for resource changes and receive real-time notifications'
+---
+
+Agentkube's Watcher feature provides real-time monitoring of your Kubernetes clusters, automatically detecting resource changes and delivering structured notifications through various channels including webhooks, Slack, email, and other services.
+
+## Getting Started with Watcher
+
+The Watcher continuously monitors your Kubernetes resources and sends structured notifications when resources are created, updated, or deleted. Here's how to get started:
+
+### Configuration Options
+
+1. **Through Agentkube UI**: Navigate to `Settings` > `Watcher` for visual configuration
+2. **Through YAML file**: Create or edit `~/.agentkube/watcher.yaml` for programmatic setup
+
+
+### Quick Configuration Example
+
+```yaml
+# Notification handler
+handler:
+  webhook:
+    url: "https://your-endpoint.com/webhook"
+
+# Resources to monitor
+resource:
+  deployment: true
+  pod: true
+  service: true
+
+# Namespace scope (empty = all namespaces)
+namespace: ""
+```
+
+<Tip>
+Start with a simple webhook handler and a few resource types to test your setup before expanding to full monitoring.
+</Tip>
+
+## How Watcher Works
+
+The event processing flow follows these steps:
+
+1. **Detection**: Controllers detect Kubernetes resource changes using SharedIndexInformers
+2. **Processing**: Events are queued, processed, and enriched with metadata
+3. **Filtering**: Events are filtered based on your configuration settings
+4. **Notification**: The configured dispatcher formats and sends notifications
+
+### Message Format
+
+When the watcher sends events to your webhook endpoint, it posts a JSON payload with this structure:
+
+```json
+{
+  "eventmeta": {
+    "kind": "Pod",
+    "name": "my-pod",
+    "namespace": "default",
+    "reason": "Created"
+  },
+  "text": "Pod my-pod in namespace default has been Created",
+  "time": "2025-01-20T10:30:00Z"
+}
+```
+
+### Event Types
+
+The watcher sends three types of events for each monitored resource:
+
+• **Create events** - when resources are added to the cluster
+• **Update events** - when existing resources are modified  
+• **Delete events** - when resources are removed from the cluster
+
+## Configuration File Structure
+
+The `watcher.yaml` file contains two main sections: **handlers** and **resources**.
+
+### Basic Configuration Example
+
+```yaml
+# Notification handlers
+handler:
+  webhook:
+    url: "https://your-endpoint.com/webhook"
+    tlsskip: false
+
+# Resources to monitor
+resource:
+  deployment: true
+  pod: true
+  service: true
+  namespace: true
+
+# Monitor specific namespace (leave empty for all)
+namespace: "production"
+```
+
+## Notification Handlers
+
+Configure where notifications should be sent when events occur.
+
+<Note>
+Only configure one handler at a time. Multiple handlers are not supported simultaneously.
+</Note>
+
+### Webhook Handler
+
+Send events to any HTTP endpoint:
+
+```yaml
+handler:
+  webhook:
+    url: "https://your-endpoint.com/webhook"
+    cert: "/path/to/certificate.pem"  # Optional
+    tlsskip: false                    # Skip TLS verification
+```
+
+### Slack Integration
+
+#### Slack Webhook
+
+```yaml
+handler:
+  slackwebhook:
+    channel: "#kubernetes-alerts"
+    username: "kubewatch"
+    emoji: ":robot_face:"
+    slackwebhookurl: "https://hooks.slack.com/services/..."
+```
+
+#### Slack API Token
+
+```yaml
+handler:
+  slack:
+    token: "xoxb-your-slack-token"
+    channel: "#kubernetes-alerts"
+    title: "Cluster Events"
+```
+
+### Email Notifications
+
+```yaml
+handler:
+  smtp:
+    to: "alerts@company.com"
+    from: "kubewatch@company.com"
+    smarthost: "smtp.company.com:587"
+    subject: "Kubernetes Alert"
+    requireTLS: true
+    auth:
+      username: "smtp-user"
+      password: "smtp-password"
+```
+
+### Microsoft Teams
+
+```yaml
+handler:
+  msteams:
+    webhookurl: "https://outlook.office.com/webhook/..."
+```
+
+## Resource Monitoring
+
+Configure which Kubernetes resources to monitor for changes.
+
+### Core Resources
+
+```yaml
+resource:
+  # Pods and workloads
+  pod: true                 # Individual containers
+  deployment: true          # Application deployments
+  replicaset: true         # Pod replica management
+  statefulset: true        # Stateful applications
+  daemonset: true          # Node-level services
+  
+  # Services and networking
+  service: true            # Network services
+  ingress: true            # Ingress controllers
+  
+  # Storage and configuration
+  persistentvolume: true   # Storage volumes
+  secret: true             # Secrets
+  configmap: true          # Configuration data
+  
+  # Jobs and controllers
+  job: true                # Batch workloads
+  replicationcontroller: true  # Legacy controllers (rc)
+```
+
+### RBAC Resources
+
+```yaml
+resource:
+  # Security and access control
+  clusterrole: true        # RBAC cluster roles
+  clusterrolebinding: true # RBAC bindings
+  serviceaccount: true     # Service accounts (sa)
+```
+
+### Cluster Resources
+
+```yaml
+resource:
+  # Cluster-level resources
+  namespace: true          # Namespaces (ns)
+  node: true              # Cluster nodes
+  
+  # Auto-scaling
+  horizontalpodautoscaler: true  # Auto-scaling (hpa)
+  
+  # Events
+  event: true             # Kubernetes events
+  coreevent: true         # Legacy events
+```
+
+### Custom Resources
+
+Monitor Custom Resource Definitions (CRDs):
+
+```yaml
+customresources:
+  - group: "monitoring.coreos.com"
+    version: "v1"
+    resource: "prometheusrules"
+  - group: "argoproj.io"
+    version: "v1alpha1"
+    resource: "applications"
+```
+
+## Namespace Filtering
+
+Control which namespaces to monitor:
+
+```yaml
+# Monitor all namespaces (default)
+namespace: ""
+
+# Monitor specific namespace only
+namespace: "production"
+
+# Monitor multiple namespaces (comma-separated)
+namespace: "production,staging"
+```
+
+<Warning>
+The namespace filter is ignored when monitoring namespace resources themselves.
+</Warning>
+
+## Troubleshooting
+
+### Common Issues
+
+* **No events received**: Check if the selected resources are actually changing in your cluster
+* **Webhook not working**: Verify the endpoint URL is correct and accessible
+* **Slack notifications failing**: Ensure webhook URL is valid and channel exists
+* **Email not sending**: Check SMTP credentials and server configuration
+
+### Configuration Validation
+
+Ensure your configuration file contains:
+* At least one handler configured properly
+* At least one resource type enabled
+* Valid webhook URLs or notification service credentials
+* Proper YAML syntax and structure
+
