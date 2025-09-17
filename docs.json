@@ -89,7 +89,6 @@
           {
             "group": "IDE Settings",
             "pages": [
-              "settings/license-key",
               "settings/mcp",
               "settings/watcher",
               "settings/analytics",
