@@ -1,0 +1,82 @@
+---
+title: 'Image Scanning'
+---
+
+
+Agentkube includes built-in container image vulnerability scanning powered by [Grype](https://github.com/anchore/grype), which automatically runs in the background when the application starts up. This feature helps you identify security vulnerabilities in your container images across your Kubernetes clusters.
+
+## How It Works
+
+The image scanning feature:
+- Runs automatically in the background when Agentkube starts
+- Scans container images in your Kubernetes clusters
+- Uses Grype to detect known vulnerabilities
+- Provides detailed vulnerability reports and remediation suggestions
+- Updates vulnerability databases regularly
+
+## Configuration
+
+### Settings.json Configuration
+
+You can configure image scanning in your `settings.json` file:
+
+```json
+{
+  "imageScans": {
+    "enable": true,
+    "exclusions": {
+      "namespaces": ["kube-system", "kube-public"],
+      "labels": {
+        "scan": "false"
+      }
+    }
+  }
+}
+```
+
+### Configuration Options
+
+- **enable**: Enable or disable image scanning (default: false)
+- **exclusions.namespaces**: Array of namespace names to exclude from scanning
+- **exclusions.labels**: Key-value pairs of labels to exclude from scanning
+
+### Application Settings
+
+You can also manage image scanning through the Agentkube interface:
+
+1. **Head to Settings** → **Image Scan**
+2. **Enable/Disable Scanning**: Toggle the image scanning feature on or off
+3. **Namespace Exclusions**: Add namespaces you want to exclude from scanning
+4. **Label Exclusions**: Add label selectors to exclude specific workloads
+
+## Exclusion Examples
+
+### Exclude System Namespaces
+```json
+{
+  "imageScans": {
+    "exclusions": {
+      "namespaces": [
+        "kube-system",
+        "kube-public",
+        "kube-node-lease",
+        "istio-system"
+      ]
+    }
+  }
+}
+```
+
+### Exclude by Labels
+```json
+{
+  "imageScans": {
+    "exclusions": {
+      "labels": {
+        "security.scan": "false",
+        "environment": "development"
+      }
+    }
+  }
+}
+```

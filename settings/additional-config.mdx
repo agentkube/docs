@@ -1,0 +1,71 @@
+---
+title: 'Additional Configuration'
+---
+
+The additional configuration file stores extended tools settings for each Kubernetes cluster context. This file is located at `~/.agentkube/additionalConfig.yaml` and contains cluster-specific tool configurations.
+
+## File Structure
+
+```yaml
+clusters:
+  cluster-name:
+    tool-name:
+      enabled: true/false
+      # tool-specific configuration parameters
+```
+
+## Configuration Example
+
+```yaml
+clusters:
+  kind-cluster-1:
+    argocd:
+      enabled: false
+      namespace: argocd
+      token: YOUR_TOKEN
+      url: https://localhost:40676
+    grafana:
+      api_token: YOUR_API_TOKEN
+      enabled: false
+      url: http://localhost:3000
+    opencost:
+      enabled: false
+      namespace: opencost
+      service_address: opencost:9090
+    prometheus:
+      enabled: true
+      namespace: monitoring
+      service_address: kube-prometheus-stack-prometheus:9090
+  
+  kind-cluster-2:
+    argocd:
+      enabled: true
+      service_address: argocd-server.argocd:443
+      token: YOUR_TOKEN
+    opencost:
+      namespace: opencost
+      service_address: opencost:9090
+    prometheus:
+      enabled: true
+      namespace: monitoring
+      service_address: kube-prometheus-stack-prometheus:9090
+```
+
+## Supported Tools
+
+The configuration file supports the following extended tools:
+
+- **ArgoCD**: GitOps continuous delivery
+- **Prometheus**: Monitoring and alerting
+- **Grafana**: Visualization and analytics
+- **OpenCost**: Cost monitoring and optimization
+- **Trivy**: Vulnerability scanning
+- **Datadog**: Cloud monitoring platform
+- **Alertmanager**: Alert handling and routing
+- **SigNoz**: Observability platform
+- **Loki**: Log aggregation
+- **Tempo**: Distributed tracing
+
+## Management
+
+This configuration file is automatically managed through the Agentkube GUI when you configure extended tools in Settings → Agent → Tools - Extended. Manual editing is also supported for advanced configurations.

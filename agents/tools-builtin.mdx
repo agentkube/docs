@@ -1,0 +1,60 @@
+---
+title: 'Tools - Builtin'
+---
+
+Agentkube comes with four essential built-in tools that provide comprehensive functionality for Kubernetes management and system operations. These tools are always available and require no additional configuration.
+
+## File System Tool
+
+The File System tool enables comprehensive file and directory operations within your environment.
+
+### Capabilities
+- **File Operations**: Create, read, update, and delete files
+- **Directory Management**: Create, list, and manage directories
+- **Path Resolution**: Support for both absolute and relative paths
+- **Content Management**: Search and replace operations within files
+- **File Monitoring**: Watch files for changes
+- **Disk Usage**: Check disk space and usage statistics
+
+## Terminal Tool
+
+The Terminal tool provides secure command execution capabilities with comprehensive process management.
+
+### Capabilities
+- **Command Execution**: Run system commands with security validation
+- **Process Management**: List, monitor, and terminate running processes
+- **System Information**: Get CPU, memory, and disk usage statistics
+- **Security Controls**: Command filtering through deny lists configured in `settings.json`
+- **Output Capture**: Capture command output and error streams
+
+The deny list can be configured in Settings → Agent → Deny List to prevent specific commands from being executed.
+
+## Kubectl Tool
+
+The Kubectl tool provides comprehensive Kubernetes cluster management capabilities through the standard kubectl command-line interface.
+
+### Capabilities
+- **Resource Management**: Create, read, update, and delete Kubernetes resources
+- **Cluster Information**: Get cluster status, nodes, and system information
+- **Workload Operations**: Manage pods, deployments, services, and other workloads
+- **Configuration**: Handle ConfigMaps, Secrets, and persistent volumes
+- **Debugging**: Access logs, execute commands in pods, and troubleshoot issues
+- **Scaling**: Horizontal and vertical scaling of deployments
+- **Rolling Updates**: Manage application deployments and rollbacks
+- **Port Forwarding**: Access services and pods locally
+- **Resource Monitoring**: Check resource usage and performance metrics
+- **Node Management**: Cordon, uncordon, and drain nodes for maintenance
+
+## Helm Tool
+
+The Helm tool provides package management for Kubernetes applications using the Helm package manager.
+
+### Capabilities
+- **Repository Management**: Add, remove, and update Helm chart repositories
+- **Chart Operations**: Install, upgrade, rollback, and uninstall applications using Helm charts
+- **Release Management**: Monitor status, track history, and manage configuration values
+- **Search**: Find available charts across repositories
+- **Testing**: Run release tests to verify functionality
+- **Dry Run**: Preview changes before applying
+- **Custom Values**: Use values files and command-line overrides
+- **Manifest Inspection**: View generated Kubernetes manifests

@@ -1,0 +1,47 @@
+1. Investigation Tasks
+Agents automatically investigate issues in the background, just like an engineer.
+Focused on discovering the root cause of failures by analyzing resource states, cluster activity, dependencies, and alerts.
+Connects with external and observability tools - including Prometheus, Alertmanager, Datadog, New Relic, GitHub, Docker, Trivy, and many more - to enrich investigations with broader context.
+Surfaces clear, actionable insights that point engineers to the likely cause and next steps, not just raw signals.
+2. Recon Mode
+Run Agents in read-only access.
+Safely explore cluster state without making any changes.
+Ideal for audits, compliance checks, and safe troubleshooting.
+4. Out-of-the-Box Plugins
+Preloaded with essential plugins like OpenCost, Trivy, and Kubernetes Linting.
+Instantly extend monitoring, cost visibility, and security scanning without extra setup.
+5. Deep Tool Integrations
+Agents natively integrate with the tools engineers already rely on:
+Security & Scanning: Trivy (image scanning & vulnerabilities)
+Cost Monitoring: OpenCost (TBA Cast AI, etc.)
+Metrics & Monitoring: Prometheus, Datadog, New Relic, SigNoz
+Logging & Tracing: Loki, Tempo, Grafana
+CD: ArgoCD
+Alerting & Ops: Alertmanager
+Runtime & Code: Docker, GitHub
+These integrations allow Agents to perform daily tasks and investigations seamlessly.
+6. MCP (Model Context Protocol) Marketplace
+Built-in MCP Marketplace inside the IDE easy to plug-and-play usage.
+No hassle of finding, installing, or configuring MCP servers manually.
+7. Context Settings for Agents
+Fine-tune how Agents operate in your cluster.
+Define rules for:
+Which resources to ignore.
+Which namespaces to skip.
+Custom operational rules Agents must follow.
+Ensures safe, governed automation across environments.
+8. Workflows with KubeSpotlight
+Spotlight-driven workflows directly in the IDE:
+Seamlessly jump between clusters.
+Describe resources instantly.
+Run commands directly.
+Navigate between resources via the taskbar itself.
+Eliminates constant context-switching for engineers.
+9. Custom LLM API Keys
+Bring your own keys (OpenAI, Anthropic, Google, Azure, AWS Bedrock).
+
+Changed Authentication Mechanism no user will be redirected to browser for authentication
+
+Now user can check telemetry data for their resource directly from the panel, on click on 3 dots user 
+view the all the CPU, Memory, Disk and Network usage metrics
+Add Mininal Monitoring overview support kube-prometheus-stack currently

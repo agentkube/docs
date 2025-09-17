@@ -1,0 +1,113 @@
+---
+title: 'Context'
+description: 'Control which Kubernetes resources AI agents can access using .kubeignore'
+---
+
+Agentkube uses a `.kubeignore` file to control which Kubernetes resources AI agents should ignore when analyzing your cluster. This file is located at `~/.agentkube/.kubeignore` and follows a simple, line-based syntax similar to `.gitignore`.
+
+## File Format
+
+- Lines starting with `#` are comments
+- Blank lines are ignored  
+- Each rule is one line with a specific syntax pattern
+- Globs use `*`, `?`, and `**` (for file paths)
+
+## Rule Types
+
+| Rule Type | Syntax | Description |
+|-----------|--------|-------------|
+| Namespace | `namespace: <glob>` | Ignore any resource in matching namespaces |
+| Kind | `kind: <glob>` | Ignore resources by Kubernetes kind |
+| GVK | `gvk: <apiVersion>/<Kind>` | Ignore by exact API version and kind |
+| Name | `name: <glob>` | Ignore resources by name pattern |
+| GVKN | `gvkn: <apiVersion>/<Kind>/<namespace>/<name>` | Ignore specific resource in specific namespace |
+| Label | `label: <key>=<value>` | Ignore resources with matching labels |
+| Annotation | `annotation: <key>=<value>` | Ignore resources with matching annotations |
+| File | `file: <glob>` | Ignore manifest files by path pattern |
+
+## Example .kubeignore
+
+```bash
+# ──────────────────────────────────────────────────
+# Skip entire namespaces
+# ──────────────────────────────────────────────────
+namespace: kube-system
+namespace: monitoring
+namespace: istio-system
+
+# ──────────────────────────────────────────────────
+# Skip by kind or API group/kind
+# ──────────────────────────────────────────────────
+kind: Secret
+kind: ConfigMap
+gvk: apps/v1/Deployment
+
+# ──────────────────────────────────────────────────
+# Skip specific resources in specific namespaces
+# ──────────────────────────────────────────────────
+gvkn: apps/v1/Deployment/dev/test-app
+gvkn: batch/v1/Job/qa/*
+gvkn: v1/ConfigMap/*/temp-*
+
+# ──────────────────────────────────────────────────
+# Skip by name patterns
+# ──────────────────────────────────────────────────
+name: test-*-db
+name: *-backup
+
+# ──────────────────────────────────────────────────
+# Skip by labels and annotations
+# ──────────────────────────────────────────────────
+label: skip-ci=true
+label: tier=dev-*
+annotation: audit.k8s.io/ignore=always
+
+# ──────────────────────────────────────────────────
+# Skip manifest files
+# ──────────────────────────────────────────────────
+file: drafts/**
+file: tmp-*.yaml
+file: **/test-manifests/*
+```
+
+## How It Works
+
+For each Kubernetes resource, Agentkube builds candidate keys from:
+
+- `metadata.namespace` (defaults to `default`)
+- `kind` and `apiVersion`
+- `metadata.name`
+- All `metadata.labels` and `metadata.annotations`
+- Source file path (if applicable)
+
+If any rule in `.kubeignore` matches one of these keys using glob patterns, the resource is ignored by AI agents.
+
+## Common Use Cases
+
+### Skip System Resources
+```bash
+namespace: kube-system
+namespace: kube-public
+namespace: kube-node-lease
+```
+
+### Skip Sensitive Data
+```bash
+kind: Secret
+annotation: secret-manager.io/managed=true
+```
+
+### Skip Development Resources
+```bash
+label: environment=dev
+gvkn: apps/v1/Deployment/*/test-*
+```
+
+### Skip Temporary Resources
+```bash
+name: *-backup
+name: temp-*
+label: temporary=true
+```
+
+The `.kubeignore` file provides fine-grained control over what resources your AI agents can see and analyze, helping you maintain security and focus on relevant resources.

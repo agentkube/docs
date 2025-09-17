@@ -1,0 +1,75 @@
+---
+title: 'Side Chat'
+---
+
+During cluster management and troubleshooting, you can interact with the AI assistant in the side chat box at any time. This includes answering Kubernetes questions, explaining cluster resources, generating manifests, debugging issues, and more.
+
+### Open the Chat
+
+After entering Agentkube, you can open the AI panel on the right side using the shortcut (macOS: `Command + L`; Windows: `Ctrl + L`) to open it.
+
+
+Agentkube offers a range of functionalities that you can use during chat, enabling you to manage your clusters more efficiently.
+
+### Models
+
+Agentkube provides a series of outstanding AI models in the industry. You can easily switch between different models for use. In addition, Agentkube supports adding custom models through your own API keys to better meet your personalized needs.
+
+### Agents
+
+Agents are your Kubernetes assistants for various cluster management scenarios. Agentkube provides built-in agents specialized for different tasks like cluster management, monitoring, security, and cost optimization. These agents utilize the tools and capabilities documented in our system.
+
+### Resource Context
+
+The AI assistant can understand the context of your current cluster, including resources, configurations, and relationships, allowing it to assist you more accurately in fulfilling your cluster management needs. You can:
+
+- **Select Resources**: Pick specific Kubernetes resources to add context to your conversation
+- **Add from Resource Views**: Navigate to any Resource View page in Agentkube GUI and click "Ask AI", "Ask Agentkube", or "Add to Chat" to add specific resources, logs, and context to side chat
+
+### Built-in Tools Integration
+
+The side chat leverages all the capabilities we've documented:
+
+**File System Operations**: Create, read, update, and delete files and directories within your environment
+
+**Terminal Commands**: Execute system commands with security validation and process management
+
+**Kubectl Operations**: Comprehensive Kubernetes cluster management through kubectl integration
+
+**Helm Management**: Package management for Kubernetes applications using Helm charts
+
+**Extended Tools**: When configured, access to monitoring tools (Prometheus, Grafana), security scanning (Trivy), GitOps (ArgoCD), observability (Loki, Tempo, SigNoz), cost analysis (OpenCost), and more
+
+**Image Scanning**: Automated container vulnerability scanning using Grype integration
+
+### Context Management
+
+**Rules Integration**: AI follows your defined user rules and cluster-specific rules stored in `~/.agentkube/rules/`
+
+**Resource Filtering**: Respects `.kubeignore` configurations to focus on relevant resources while maintaining security
+
+**Multi-Cluster Support**: Maintains awareness of cluster-specific configurations when switching contexts
+
+### Generate and Handle Kubernetes Resources
+
+Based on your needs, the AI assistant will automatically create new Kubernetes manifests or edit existing ones. You can accept or reject resource changes, including:
+
+- Creating new deployments, services, configmaps, and other Kubernetes resources
+- Modifying existing cluster configurations
+- Generating Helm charts and values files
+- Applying security policies and network configurations
+
+### Generate and Run Commands
+
+During chat, based on your needs, the AI assistant will provide executable kubectl, helm, and system commands that you can run with a single click, including:
+
+- Kubernetes resource operations (`kubectl get`, `kubectl apply`, etc.)
+- Helm chart management (`helm install`, `helm upgrade`, etc.)
+- Cluster debugging commands
+- Log retrieval and analysis commands
+
+### Manage Historical Chats
+
+Currently, Agentkube does not maintain historical chat sessions. Each chat session is independent and starts fresh.
+
+The side chat serves as your central interface for interacting with all Agentkube capabilities, providing intelligent assistance for every aspect of Kubernetes cluster management.

@@ -1,0 +1,217 @@
+---
+title: 'Tools - Extended'
+---
+
+Agentkube supports extended tools that enhance your Kubernetes environment with specialized monitoring, security scanning, and operational capabilities. These tools require configuration and are stored per cluster in `~/.agentkube/additionalConfig.yaml`.
+
+## Configuration Management
+
+Extended tools are configured per cluster context and stored in your `~/.agentkube/additionalConfig.yaml` file. Each tool requires specific configuration parameters and can be enabled/disabled independently for each cluster.
+
+### Configuration Structure
+```yaml
+cluster-name:
+  tool-name:
+    enabled: true/false
+    # tool-specific configuration parameters
+```
+
+## Docker
+
+Container platform for building, shipping, and running applications.
+
+<ResponseField name="docker" type="Configuration Object">
+  <Expandable title="Configuration Parameters">
+    <ResponseField name="url" type="string">
+      Custom registry URL (defaults to Docker Hub)
+    </ResponseField>
+
+    <ResponseField name="endpoint" type="string">
+      Authentication endpoint for private registries
+    </ResponseField>
+
+    <ResponseField name="user" type="string">
+      Registry username (optional)
+    </ResponseField>
+
+    <ResponseField name="key" type="string">
+      Personal Access Token or password (optional)
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## ArgoCD
+
+Declarative GitOps continuous delivery tool for Kubernetes.
+
+<ResponseField name="argocd" type="Configuration Object">
+  <Expandable title="Configuration Parameters">
+    <ResponseField name="service_address" type="string">
+      Internal Kubernetes service address (required)
+    </ResponseField>
+
+    <ResponseField name="url" type="string">
+      External ArgoCD URL for browser access (optional)
+    </ResponseField>
+
+    <ResponseField name="token" type="string">
+      ArgoCD authentication token (required)
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## Prometheus
+
+Monitoring and alerting toolkit with time series database.
+
+<ResponseField name="prometheus" type="Configuration Object">
+  <Expandable title="Configuration Parameters">
+    <ResponseField name="url" type="string">
+      Prometheus server URL (required)
+    </ResponseField>
+
+    <ResponseField name="namespace" type="string">
+      Kubernetes namespace where Prometheus is deployed (required)
+    </ResponseField>
+
+    <ResponseField name="service_address" type="string">
+      Internal service address for cluster access (optional)
+    </ResponseField>
+
+    <ResponseField name="basic_auth" type="object">
+      Username and password for authentication (optional)
+    </ResponseField>
+
+    <ResponseField name="token" type="string">
+      Bearer token for authentication (optional)
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## Trivy
+
+Vulnerability scanner for containers, filesystems, and Git repositories.
+
+<ResponseField name="trivy" type="Configuration Object">
+  <Expandable title="Configuration Parameters">
+    <ResponseField name="url" type="string">
+      Trivy server URL (required)
+    </ResponseField>
+
+    <ResponseField name="token" type="string">
+      Authentication token for Trivy server (optional)
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## Grafana
+
+Visualization and analytics platform for monitoring data.
+
+<ResponseField name="grafana" type="Configuration Object">
+  <Expandable title="Configuration Parameters">
+    <ResponseField name="url" type="string">
+      Grafana server URL (required)
+    </ResponseField>
+
+    <ResponseField name="api_token" type="string">
+      Grafana API key for authentication (required)
+    </ResponseField>
+
+    <ResponseField name="basic_auth" type="object">
+      Username and password authentication (optional)
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## Datadog
+
+Cloud monitoring platform for infrastructure, applications, and logs.
+
+<ResponseField name="datadog" type="Configuration Object">
+  <Expandable title="Configuration Parameters">
+    <ResponseField name="url" type="string">
+      Datadog API URL (defaults to US1 region)
+    </ResponseField>
+
+    <ResponseField name="api_token" type="string">
+      Datadog API key (required)
+    </ResponseField>
+
+    <ResponseField name="key" type="string">
+      Datadog application key (required)
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## Tempo
+
+High-scale distributed tracing backend by Grafana.
+
+## Loki
+
+Log aggregation system designed to store and query logs efficiently.
+
+## Alertmanager
+
+Handles alerts sent by Prometheus server and routes them to receivers.
+
+<ResponseField name="alertmanager" type="Configuration Object">
+  <Expandable title="Configuration Parameters">
+    <ResponseField name="url" type="string">
+      Alertmanager server URL (required)
+    </ResponseField>
+
+    <ResponseField name="token" type="string">
+      Authentication token (optional)
+    </ResponseField>
+
+    <ResponseField name="basic_auth" type="object">
+      Username and password authentication (optional)
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## SigNoz
+
+Open-source observability platform with APM, logs, and metrics.
+
+<ResponseField name="signoz" type="Configuration Object">
+  <Expandable title="Configuration Parameters">
+    <ResponseField name="url" type="string">
+      SigNoz server URL (required)
+    </ResponseField>
+
+    <ResponseField name="api_token" type="string">
+      Authentication token (optional)
+    </ResponseField>
+
+    <ResponseField name="basic_auth" type="object">
+      Username and password authentication (optional)
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## OpenCost
+
+Real-time cost monitoring and optimization for Kubernetes.
+
+<ResponseField name="opencost" type="Configuration Object">
+  <Expandable title="Configuration Parameters">
+    <ResponseField name="service_address" type="string">
+      Internal Kubernetes service address (required)
+    </ResponseField>
+
+    <ResponseField name="namespace" type="string">
+      Kubernetes namespace where OpenCost is deployed (required)
+    </ResponseField>
+
+    <ResponseField name="url" type="string">
+      External OpenCost URL (optional)
+    </ResponseField>
+
+    <ResponseField name="token" type="string">
+      Authentication token (optional)
+    </ResponseField>
+  </Expandable>
+</ResponseField>

@@ -1,41 +1,33 @@
 ---
 title: 'Investigation'
-description: 'Investigations in Agentkube'
 ---
 
-<Note type="warning">
-This feature is yet to be implemented in the newer version. Please be patient, you will get this feature in future updates.
-</Note>
 
-Investigations are automated analysis workflows that help identify and diagnose issues within Kubernetes clusters. They reduce Mean Time To Repair (MTTR) by systematically analyzing cluster state and suggesting remediation steps.
+Investigation Tasks allow agents to automatically investigate issues in the background, just like an engineer. They focus on discovering the root cause of failures by analyzing resource states, cluster activity, dependencies, and alerts.
 
-<Tip>
-Currently, Investigations can be initiated manually through the Agentkube dashboard. Automatic triggering of response protocol will be added in future releases.
-</Tip>
+Agents analyze resource states, cluster activity, and dependencies to identify the underlying cause of issues. The feature connects with observability tools including Prometheus, Alertmanager, Datadog, New Relic, GitHub, Docker, Trivy, and many more to enrich investigations with broader context. It surfaces clear, actionable insights that point engineers to the likely cause and next steps, not just raw signals. All tasks run in the background as read-only operations, providing you with a comprehensive task report in seconds.
 
-Agentkube's Investigation feature enables quick identification of cluster issues through automated analysis tools. It employs a systematic approach which is defined by the you in response protocol, it examines cluster state ensure comprehensive problem diagnosis.
+## How to Use
 
-<img
-  src="/images/investigation.png"
-  alt="Hero Light"
-/>
+To start an investigation:
+
+1. Use the keyboard shortcut (`Command + E` on macOS, `Ctrl + E` on Windows)
+2. This opens the Investigation Task Dialog
+3. Pick the resource from resource context
+4. Select logs from the particular container 
+5. Choose your preferred model
+6. Ask the agent to investigate
+7. The investigation runs in the background, performing read-only analysis
+8. Receive a detailed task report within seconds
 
 ## Investigation Process
 
-### 1. Issue Detection
-- Identifies anomalies in cluster behavior
-- Gathers initial diagnostic information
-- Determines affected components
+The agent performs the following steps automatically:
 
-### 2. Data Collection
-- Collects relevant logs
-- Gathers metrics
-- Captures cluster state
-
-
-### 3. Findings
-- Identifies potential root causes
-- Provides evidence for conclusions
-- Suggests remediation steps
-- Assesses impact
+1. **Resource Analysis**: Examines the selected Kubernetes resource configuration and current state
+2. **Log Analysis**: Reviews container logs for errors, warnings, and patterns
+3. **Dependency Mapping**: Identifies related resources and potential impact chains
+4. **External Data**: Queries configured monitoring and observability tools for additional context
+5. **Root Cause Identification**: Correlates findings to determine the most likely cause
+6. **Remediation Suggestions**: Provides specific next steps to resolve the issue
 

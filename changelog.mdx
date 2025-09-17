@@ -3,16 +3,24 @@ title: 'Changelog'
 description: 'Updates and improvements to Agentkube'
 ---
 
-## Upcoming Release v1.0.5 - End of July / Early August 2025
+## Upcoming Release v0.6
 
-**🔮 Coming Soon**
-* Release scheduled for late July or early August 2025
-* Stay tuned for new features and improvements!
-
+**🚀 New Features & Fixes**
+* **Investigation Tasks**: _Beta_ Agents automatically investigate issues in the background, analyzing resource states, cluster activity, dependencies, and alerts to discover root causes
+* **Recon Mode**: Run Agents in read-only access for safe exploration, audits, compliance checks, and troubleshooting
+* **Out-of-the-Box Plugins**: Preloaded with essential plugins like OpenCost, Trivy, and Kubernetes Linting for instant monitoring, cost visibility, and security scanning
+* **Deep Tool Integrations**: Native integrations with Trivy, OpenCost, Prometheus, Datadog, New Relic, SigNoz, Loki, Tempo, Grafana, ArgoCD, Alertmanager, Docker, and GitHub
+* **MCP Marketplace**: Built-in MCP Marketplace inside the IDE for easy plug-and-play usage without manual configuration
+* **Context Settings for Agents**: Fine-tune Agent operations with custom rules for resource filtering, namespace skipping, and operational governance
+* **Workflows with KubeSpotlight**: Spotlight-driven workflows for seamless cluster navigation, resource description, and direct command execution
+* **Custom LLM API Keys**: Support for bringing your own keys (OpenAI, Anthropic, Google, Azure, AWS Bedrock)
+* **Enhanced Authentication**: Changed authentication mechanism - no browser redirects required
+* **Telemetry Panel**: View CPU, Memory, Disk, and Network usage metrics directly from the resource panel
+* **Minimal Monitoring**: Added monitoring overview support for kube-prometheus-stack
 
 ---
 
-## Release v1.0.4 - May 28, 2025
+## Release v0.4 - May 28, 2025
 
 **🚀 New Features & Fixes**
 * **PromQL Spotlight**: Allows users to query Prometheus metrics and execute them directly from the spotlight interface.
@@ -21,7 +29,7 @@ description: 'Updates and improvements to Agentkube'
 
 ---
 
-## Release v1.0.3 - May 25, 2025
+## Release v0.3 - May 25, 2025
 
 **🚀 New Features & Fixes**
 * **MCP Server Management**: Added ability to switch between MCP servers directly through Kube Spotlight
@@ -30,7 +38,7 @@ description: 'Updates and improvements to Agentkube'
 
 ---
 
-## Release v1.0.2 - May 15, 2025
+## Release v0.2 - May 15, 2025
 
 **🚀 New Features & Fixes**
 * **KubeSpotlight Tab Completion**: Added Kubernetes shortcuts on tab press for improved user experience.
@@ -43,7 +51,7 @@ description: 'Updates and improvements to Agentkube'
 
 ---
 
-## Release v1.0.1 - May 9, 2025
+## Release v0.1 - May 9, 2025
 
 **🚀 New Features & Fixes**
 
@@ -62,7 +70,7 @@ description: 'Updates and improvements to Agentkube'
 
 ---
 
-## Release v1.0.0 - May 3, 2025
+## Release v0.0 - May 3, 2025
 
     **✨ Major improvements**
     - **Desktop IDE**: Transitioned from a web application to a high-performance desktop IDE built with Rust, offering enhanced speed and native system integration.
@@ -74,9 +82,7 @@ description: 'Updates and improvements to Agentkube'
     **🔌 Plugins & Integrations**
     - **OpenCost Plugin**: Added support for cost monitoring and optimization in Kubernetes environments.
     - **Trivy Vulnerability Scan**: Implemented plugin support for enhanced security assessments of container images.
----
-
-## Release v0.9.12 - May 2, 2025
+  
     **✨ Improvements**
     - User Subscription Fixes for individual and team plans
 ---

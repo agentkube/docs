@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "almond",
+  "theme": "maple",
   "name": "Agentkube",
   "logo": {
     "light": "/logo/light.svg",
@@ -8,9 +8,9 @@
   },
   "favicon": "/favicon.svg",
   "colors": {
-    "primary": "#0D9373",
-    "light": "#07C983",
-    "dark": "#0D9373"
+    "primary": "#060607",
+    "light": "#f5f5f5",
+    "dark": "#060607"
   },
   "navbar": {
     "links": [
@@ -53,27 +53,59 @@
             ]
           },
           {
-            "group": "Feature",
+            "group": "Features",
             "pages": [
-              "features/runbooks",
               "features/investigation",
               "features/editor",
-              "features/monitoring"
+              "features/monitoring",
+              "features/image-scan",
+              {
+                "group": "Chat",
+                "pages": [
+                  "chat/side-chat",
+                  "chat/inline-chat"
+                ]
+              }
             ]
           },
           {
-            "group": "Settings",
+            "group": "Agents",
             "pages": [
-              "settings/mcp",
+              "agents/overview",
+              {
+                "group": "Settings",
+                "pages": [
+                  "agents/tools-builtin",
+                  "agents/tools-extended",
+                  "agents/mcp",
+                  "agents/marketplace",
+                  "agents/context",
+                  "agents/rules"
+                ]
+              }
+     
+            ]
+          },
+          {
+            "group": "IDE Settings",
+            "pages": [
               "settings/license-key",
+              "settings/mcp",
+              "settings/watcher",
+              "settings/analytics",
               "settings/custom-api",
-              "settings/watcher"
+              "settings/authentication",
+              "settings/additional-config"
+              
             ]
           },
           {
-            "group": "Updates",
+            "group": "Help & Resources",
             "pages": [
-              "changelog"
+              "changelog",
+              "privacy",
+              "terms-of-services",
+              "system-status"
             ]
           }
         ]

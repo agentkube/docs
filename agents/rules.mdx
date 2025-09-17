@@ -1,0 +1,48 @@
+---
+title: 'Rules'
+description: 'Customize AI agent behavior with user and cluster-specific rules'
+---
+
+You can set up rules to regulate the behavior of AI agents in Agentkube. Rules are stored in `~/.agentkube/rules` as `user_rules.md` and `cluster_rules.md` files.
+
+## Rule Types
+
+Agentkube supports two types of rules for its AI agents:
+
+| Rule Type | Description |
+|-----------|-------------|
+| User Rules | Your customized guidelines for AI based on your personal habits and needs, aimed at making AI's outputs more aligned with your personalized requirements. User rules work across all clusters. Examples include:<br/>• Language style: Preference for concise, formal, or technical expressions<br/>• Operating system: Providing answers specific to Linux, Windows, or macOS<br/>• Content style: Whether detailed explanations and examples are needed, or just conclusions<br/>• Interaction method: Preference for direct answers versus guided questioning |
+| Cluster Rules | Guidelines that the AI must follow for the current Kubernetes cluster. Cluster rules work only in the cluster context they are added to. Examples include:<br/>• Deployment practices: Preferred deployment strategies and patterns<br/>• Resource management: Memory and CPU allocation guidelines<br/>• Security policies: Network policies, RBAC configurations, and security constraints<br/>• Monitoring requirements: Specific observability and logging requirements |
+
+## Create User Rules
+
+Based on your personal preferences, create the rules that AI must follow across all clusters.
+
+1. Navigate to Settings → Agent → Rules
+2. In the User Rules section, click the **+ Create user_rules.md** button
+3. The system automatically creates the `user_rules.md` file and opens it in the editor
+4. In the `user_rules.md` file, define the rules that AI must follow
+5. Save your settings
+
+Your rules will be applied to AI across all cluster contexts.
+
+## Create Cluster Rules
+
+Create the rules that AI must follow in a specified Kubernetes cluster.
+
+1. Select your target cluster context
+2. Navigate to Settings → Agent → Rules  
+3. In the Cluster Rules section, click the **+ Create cluster_rules.md** button
+4. The system automatically creates the `cluster_rules.md` file in `~/.agentkube/rules/`
+5. In the `cluster_rules.md` file, define the cluster-specific rules that AI must follow
+6. Save your settings
+
+Your rules will be applied to AI when working with this specific cluster.
+
+## Manage Rules
+
+In the Rules window, you can modify user rules and cluster rules, as well as delete rule files.
+
+- After modifying the rules, the AI will follow the new rules immediately
+- Deleting a rule file will invalidate all previously defined rules
+- Rules are automatically loaded when switching between cluster contexts

@@ -1,29 +1,31 @@
 ---
-title: 'AI Editor'
-description: 'Guide for using Agentkube AI Editor for Kubernetes manifests'
+title: 'Editor'
 ---
 
-<Warning>
-This is an older version of the documentation that will soon be updated. Please check back for the latest features and instructions.
-</Warning>
+Agentkube Editor is a text editor for working with Kubernetes manifest files.
 
-<img
-  src="/images/ai-editor.png"
-  alt="Hero Dark"
-/>
+## Add to Chat Functionality
 
-Agentkube AI Editor is a specialized tool designed to streamline the process of working with Kubernetes manifest files. It provides intelligent debugging, validation, and optimization capabilities to enhance your Kubernetes development workflow.
+Agentkube supports `Add to Chat` functionality rather than full inline editing capabilities. This allows you to:
+- Select specific lines in Kubernetes resources in the editor
+- Click `Add to Chat` or use the keyboard shortcut (`Command + I` on macOS, `Ctrl + I` on Windows) to send the selected resource context to the side chat
+- The selected resource configuration, metadata, and relevant context will be automatically added to your chat conversation
+- Ask the AI assistant questions about specific manifests, configurations, or troubleshooting
 
-<Tip>
-Access the AI Editor through the Agentkube dashboard to start working with your Kubernetes manifests.
-</Tip>
+## Security Tab
 
-## Keyboard Commands
+Under the **Security** tab, you can scan your manifest files to check for any vulnerabilities:
 
-| Action | Windows | Mac | Description |
-|:-------|:--------|:----|:------------|
-| Insert Code | Ctrl + K | ⌘ + K | Quickly paste code snippets into the input field |
-| Select Resource (Coming Soon) | Ctrl + E | ⌘ + E | Quick select Kubernetes resources |
-| Find in Manifest (Coming Soon) | Ctrl + F | ⌘ + F | Search within manifest files |
-| Save Changes (Coming Soon) | Ctrl + S | ⌘ + S | Save current manifest changes |
-| Format Document (Coming Soon) | Ctrl + Shift + F | ⌘ + Shift + F | Auto-format manifest syntax |
+- **Trivy Integration**: Uses Trivy to scan your Kubernetes manifests
+- **Vulnerability Detection**: Identifies security issues in container images, configurations, and resource definitions
+- **Detailed Reports**: View vulnerability details, severity levels, and recommended fixes
+
+## Diff Tab
+
+The **Diff** tab allows you to review changes made to your manifest files:
+
+- **Change Tracking**: View all modifications made to your Kubernetes manifests
+- **Side-by-side Comparison**: Compare original and modified versions of your files
+- **Highlight Changes**: Added, removed, and modified lines are clearly highlighted
+- **Review Before Apply**: Review all changes before applying them to your cluster
+
