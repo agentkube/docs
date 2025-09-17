@@ -41,6 +41,10 @@
       "view"
     ]
   },
+  "styling": {
+    "eyebrows": "section",
+    "codeblocks": "system"
+  },
   "navigation": {
     "tabs": [
       {
