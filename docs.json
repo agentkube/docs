@@ -61,6 +61,8 @@
             "pages": [
               "features/investigation",
               "features/editor",
+              "features/recon-mode",
+              "features/resource-canvas",
               "features/monitoring",
               "features/image-scan",
               {
@@ -97,7 +99,7 @@
               "settings/watcher",
               "settings/analytics",
               "settings/custom-api",
-              "settings/authentication",
+              "settings/account",
               "settings/additional-config"
               
             ]
