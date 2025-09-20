@@ -1,0 +1,127 @@
+---
+title: "Set Up"
+---
+
+To get started, please ensure that your device meets the requirements, click the download link, and follow the instructions to install and run Agentkube.
+
+export const DownloadButton = ({ platform }) => {
+  const [downloadUrl, setDownloadUrl] = useState('')
+  const [loading, setLoading] = useState(true)
+  const [version, setVersion] = useState('')
+
+  useEffect(() => {
+    // Need to update current version 
+    const CURRENT_VERSION = 'v0.0.6'
+    
+    const getDownloadUrls = (version) => {
+      const versionWithoutV = version.replace('v', '')
+      return {
+        'mac-intel': `https://github.com/agentkube/agentkube/releases/download/${version}/Agentkube_${versionWithoutV}_x64.dmg`,
+        'mac-arm': `https://github.com/agentkube/agentkube/releases/download/${version}/Agentkube_${versionWithoutV}_aarch64.dmg`,
+        'windows-64': `https://github.com/agentkube/agentkube/releases/download/${version}/Agentkube_${versionWithoutV}_x64-setup.exe`,
+        'windows-32': `https://github.com/agentkube/agentkube/releases/download/${version}/Agentkube_${versionWithoutV}_x86-setup.exe`
+      }
+    }
+    
+    const downloadUrls = getDownloadUrls(CURRENT_VERSION)
+    setDownloadUrl(downloadUrls[platform])
+    setVersion(CURRENT_VERSION)
+    setLoading(false)
+  }, [platform])
+
+  const getPlatformName = (platform) => {
+    const names = {
+      'mac-intel': 'Mac Intel',
+      'mac-arm': 'Mac ARM',
+      'windows-64': 'Windows 64-bit',
+      'windows-32': 'Windows 32-bit'
+    }
+    return names[platform] || platform
+  }
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-4">
+        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
+        <span className="ml-2 text-sm">Loading...</span>
+      </div>
+    )
+  }
+
+  return (
+    <div className="mt-4">
+      <a
+        href={downloadUrl}
+        className="inline-flex items-center justify-center px-6 py-2 bg-neutral-800 text-neutral-800 text-sm font-medium rounded-lg hover:bg-neutral-900 border-none transition-colors"
+        download
+      >
+        Download for {getPlatformName(platform)}
+      </a>
+      {version && (
+        <p className="text-sm text-neutral-500 mt-2">Version: {version}</p>
+      )}
+    </div>
+  )
+}
+
+<Tabs>
+<Tab title="Mac Intel">
+**Minimum OS Version:** macOS 10.14
+
+<DownloadButton platform="mac-intel" />
+</Tab>
+
+<Tab title="Mac ARM">
+**Minimum OS Version:** macOS 11.0
+
+<DownloadButton platform="mac-arm" />
+</Tab>
+
+<Tab title="Windows 64-bit">
+**Minimum OS Version:** Windows 10
+
+<DownloadButton platform="windows-64" />
+</Tab>
+
+<Tab title="Windows 32-bit">
+**Minimum OS Version:** Windows 10
+
+<DownloadButton platform="windows-32" />
+</Tab>
+
+<Tab title="Linux">
+
+Linux support is yet to be provided
+
+</Tab>
+</Tabs>
+
+## Getting Started
+
+Once you have downloaded and installed Agentkube:
+
+
+### Login
+
+1. **Open Agentkube** - Launch the application after installation
+2. **Click Settings Icon** - Click on the settings icon in the top right corner
+3. **Head to Account** - Navigate to the Account section
+
+<Frame caption="Account settings with Sign In option">
+  <img src="/images/signin.png" alt="Account settings showing the Sign In button for authentication" />
+</Frame>
+
+4. **Click Sign In** - This will open authentication in your browser
+5. **Complete Authentication** - Follow the browser authentication flow
+
+<Frame caption="Browser authentication flow">
+  <img src="/images/access-on-browser.png" alt="Browser window showing Agentkube authorization request with account permissions" />
+</Frame>
+
+<Note>
+Sign up is completely free and you get free credits!
+</Note>
+
+## Having Trouble?
+
+If you're having trouble with the installation or setup process, please reach out to our support team at [support@agentkube.com](mailto:support@agentkube.com) or join our [Discord community](https://discord.gg/UxnwzcjMWA).
