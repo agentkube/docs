@@ -1,0 +1,363 @@
+# Agentkube Documentation
+
+AI-powered Kubernetes Management IDE for Developers and DevOps Teams
+
+## Introduction
+
+Agentkube is an AI-powered Kubernetes management IDE that bridges the gap between developers and complex cluster operations. It simplifies Kubernetes adoption by automating cluster management, investigating issues, and providing intelligent solutions - all through an intuitive interface that speaks your language.
+
+Whether you're a developer looking to scale your application or a DevOps engineer streamlining operations, Agentkube reduces the to reduce incident response time while maintaining enterprise-grade reliability.
+
+## Set Up
+
+To get started, please ensure that your device meets the requirements, click the download link, and follow the instructions to install and run Agentkube.
+
+### Download Options
+- Mac Intel (macOS 10.14+)
+- Mac ARM (macOS 11.0+) 
+- Windows 64-bit (Windows 10+)
+- Windows 32-bit (Windows 10+)
+- Linux support coming soon
+
+### Prerequisites
+- kubectl - Kubernetes command-line tool
+- kubeconfig - Kubernetes cluster configuration file
+
+### Login Process
+1. Open Agentkube application
+2. Click Settings Icon in top right corner
+3. Head to Account section
+4. Click Sign In to open browser authentication
+5. Complete authentication flow
+
+Sign up is completely free and you get free credits!
+
+## Features
+
+### Investigation
+Investigation Tasks allow agents to automatically investigate issues in the background, just like an engineer. They focus on discovering the root cause of failures by analyzing resource states, cluster activity, dependencies, and alerts.
+
+Agents analyze resource states, cluster activity, and dependencies to identify the underlying cause of issues. The feature connects with observability tools including Prometheus, Alertmanager, Datadog, New Relic, GitHub, Docker, Trivy, and many more to enrich investigations with broader context.
+
+**How to Use:**
+1. Use keyboard shortcut (Command + E on macOS, Ctrl + E on Windows)
+2. Pick resource from resource context
+3. Select logs from particular container
+4. Choose your preferred model
+5. Ask the agent to investigate
+
+### Editor
+Agentkube Editor is a text editor for working with Kubernetes manifest files.
+
+**Add to Chat Functionality:**
+- Select specific lines in Kubernetes resources
+- Use Command + K (macOS) or Ctrl + K (Windows) to send context to side chat
+- Ask AI assistant questions about manifests and configurations
+
+**Security Tab:**
+- Trivy integration for manifest scanning
+- Vulnerability detection in container images and configurations
+- Detailed reports with severity levels and fixes
+
+**Diff Tab:**
+- Change tracking for manifest modifications
+- Side-by-side comparison of original and modified versions
+- Review changes before applying to cluster
+
+### Recon Mode
+Recon Mode provides read-only access to your Kubernetes cluster for both AI agents and human operators, creating a safe environment for exploration, audits, compliance checks, and troubleshooting without the risk of unintended modifications.
+
+**Invoke Recon Mode:**
+- Open the Agentkube app and look for the toggle button on the top right
+- Use shortcut: Command + / (macOS) or Ctrl + / (Windows/Linux)
+
+### Resource Canvas
+Interactive map view of how Kubernetes resources connect with each other. Visualizes dependencies, traffic flows, and bottlenecks to help engineers quickly understand cluster structure and debug issues.
+
+**Access Resource Canvas:**
+1. Navigate to Workloads within your cluster
+2. Select any workload resource (Deployment, ReplicaSet, etc.)
+3. Go into a specific resource (e.g., nginx-deployment)
+4. Navigate to the Canvas tab
+
+**How it Works:**
+- Deployment view shows ReplicaSet under Deployment and Pods under ReplicaSet
+- Interactive navigation by clicking nodes navigates to resource insights page
+- Relationship mapping visualizes resource connections and dependencies
+
+### Monitoring
+Kubernetes resource monitoring capabilities in Agentkube. Documentation still under process.
+
+### Image Scan
+Container image vulnerability scanning using Grype integration for automated security assessment.
+
+## Chat Features
+
+### Side Chat
+During cluster management and troubleshooting, you can interact with the AI assistant in the side chat box at any time. This includes answering Kubernetes questions, explaining cluster resources, generating manifests, debugging issues, and more.
+
+**Open the Chat:**
+Use shortcut Command + L (macOS) or Ctrl + L (Windows) to open the AI panel on the right side.
+
+**Key Features:**
+- Multiple AI models available
+- Built-in agents for specialized tasks
+- Resource context integration
+- Tool integrations (kubectl, helm, monitoring tools)
+- Generate and handle Kubernetes resources
+- Execute commands with single click
+
+### Inline Chat
+Agentkube provides inline chat functionality that allows you to quickly add specific context to your chat conversations. This feature is available for both resource editors and log viewers.
+
+**Invoke Inline Chat:**
+1. Place cursor in editor or select specific log entries
+2. Use shortcut Command + I (macOS) or Ctrl + I (Windows)
+
+**Add to Chat Functionality:**
+- Select specific Kubernetes resources in editor
+- Click Add to Chat to send resource context to side chat
+- Select log entries to send to side chat with timestamps and container context
+
+## Agents
+
+### Overview
+Agents are your Kubernetes assistants for various cluster management scenarios. Agentkube provides built-in agents specialized for different tasks like cluster management, monitoring, security, and cost optimization.
+
+### Tools - Builtin
+Agentkube comes with four essential built-in tools that provide comprehensive functionality for Kubernetes management and system operations. These tools are always available and require no additional configuration.
+
+**File System Tool:**
+- File operations: create, read, update, delete files
+- Directory management
+- Path resolution for absolute and relative paths
+- Content management with search and replace
+- File monitoring and disk usage checking
+
+**Terminal Tool:**
+- Secure command execution with security validation
+- Process management: list, monitor, terminate processes
+- System information: CPU, memory, disk usage
+- Security controls with deny lists
+- Output capture for commands and error streams
+
+**Kubectl Tool:**
+- Resource management: CRUD operations for Kubernetes resources
+- Cluster information and status
+- Workload operations: pods, deployments, services
+- Configuration handling: ConfigMaps, Secrets, persistent volumes
+- Debugging: logs access, pod commands, troubleshooting
+- Scaling and rolling updates
+- Port forwarding and resource monitoring
+
+**Helm Tool:**
+- Repository management: add, remove, update chart repositories
+- Chart operations: install, upgrade, rollback, uninstall applications
+- Release management: status monitoring, history tracking
+- Search functionality for available charts
+- Testing and dry run capabilities
+- Custom values and manifest inspection
+
+### Tools - Extended
+Agentkube supports extended tools that enhance your Kubernetes environment with specialized monitoring, security scanning, and operational capabilities. These tools require configuration and are stored per cluster in ~/.agentkube/additionalConfig.yaml.
+
+**Supported Tools:**
+- Docker: Container platform integration
+- ArgoCD: GitOps continuous delivery
+- Prometheus: Monitoring and alerting toolkit
+- Trivy: Vulnerability scanner for containers
+- Grafana: Visualization and analytics platform
+- Datadog: Cloud monitoring platform
+- Tempo: Distributed tracing backend
+- Loki: Log aggregation system
+- Alertmanager: Alert handling and routing
+- SigNoz: Open-source observability platform
+- OpenCost: Real-time cost monitoring for Kubernetes
+
+### MCP
+Model Context Protocol configuration and management for connecting external tools and data sources to provide context to LLMs.
+
+### Marketplace
+The MCP Marketplace provides a curated list of MCP (Model Context Protocol) servers that you can easily plug into Agentkube without needing to manually configure each server.
+
+**Configure MCP Server Methods:**
+
+**Method 1 - Add from Marketplace:**
+1. Click Settings icon in side chat
+2. Select MCP from menu
+3. Click + Add MCP Servers button
+4. Choose Add from Marketplace
+5. Find desired MCP server
+6. Click + button and configure JSON
+7. Replace environment variables with real information
+8. Click Confirm
+
+**Method 2 - Add Manually:**
+1. Click Settings icon in side chat
+2. Select MCP from menu
+3. Click + Add button, select Add Manually
+4. Fill JSON configuration information
+5. Use NPX or UVX configuration preferably
+
+### Context
+Agent context management and resource filtering for fine-tuning agent operations.
+
+### Rules
+Custom rules for agent operations and governance, allowing you to define specific behaviors and constraints for agent activities.
+
+## IDE Settings
+
+### MCP
+MCP server configuration and management interface for setting up Model Context Protocol integrations.
+
+### Watcher
+File and resource watching configuration to monitor changes in your Kubernetes environment.
+
+### Analytics
+Usage analytics and telemetry settings. You can enable/disable analytics collection to help improve the software while maintaining privacy.
+
+### Account
+Agentkube provides user authentication to track your usage and manage your subscription status.
+
+**Log In Process:**
+1. Navigate to Settings > Account
+2. Click Sign In button
+3. Redirect to browser for authentication
+4. Approve access for user information and subscription details
+5. Enable usage tracking and subscription status monitoring
+
+**Fallback Method:**
+If localhost redirect fails due to firewall or proxy restrictions:
+- Authentication page displays authorization code on-screen
+- Copy and paste code back into Agentkube desktop application
+
+**Usage Tracking:**
+Once authenticated, Agentkube can:
+- Track feature usage across different tools and capabilities
+- Monitor subscription limits and quotas
+- Display current subscription status
+- Provide usage analytics in User settings panel
+
+### Custom API
+Custom LLM API key configuration for bringing your own keys (OpenAI, Anthropic, Google, Azure, AWS Bedrock).
+
+### Additional Config
+Extended configuration options for advanced customization of Agentkube behavior and integrations.
+
+## Privacy Policy
+
+By utilizing the Agentkube Software or by otherwise indicating your consent to these Agentkube Terms of Service you acknowledge and agree to all of the terms and provisions contained herein.
+
+**Information We Collect:**
+
+**Account & Subscription Data:**
+- Name, email address, and authentication credentials
+- Subscription and billing details handled securely by payment processor
+- Agentkube does not store full payment details
+
+**Local Data (Not Collected):**
+- Kubernetes cluster configurations, workloads, and logs remain local
+- Agentkube does not transmit or store cluster data, kubeconfig files, or workload logs
+
+**Usage Analytics (Optional):**
+- Anonymous usage metrics via third-party tools like PostHog
+- Feature usage, error reports, performance logs
+- Can be disabled anytime in Settings > General
+
+**AI Integrations:**
+- Connects to OpenRouter and related providers for AI features
+- Prompts processed by providers under their privacy policies
+- Agentkube does not log, store, or reuse AI queries or responses
+
+**How We Use Information:**
+- Provide and maintain the Software
+- Verify subscription status and manage access
+- Respond to support requests
+- Improve functionality and reliability
+- Analyze usage trends for product improvements (when opted in)
+
+**Data Retention:**
+- Account and subscription data retained while account remains active
+- Request deletion by contacting info@agentkube.com
+- Local data never collected or retained by Agentkube
+
+## Terms of Service
+
+**License & Access:**
+Subject to compliance with Terms, Agentkube grants limited, non-exclusive, non-transferable, revocable right to access and use the Software through registered account.
+
+**Restrictions:**
+- Cannot reverse engineer, decompile, or extract source code
+- Cannot rent, lease, or sublicense the Software
+- Cannot share or resell access to account
+
+**Data Processing & Storage:**
+
+**Local-Only Storage:**
+- Agentkube does not transmit or store Kubernetes cluster data
+- All operational data remains on local system
+- Only user account and subscription status maintained on servers
+
+**Analytics (Optional):**
+- Non-identifiable usage metrics collection via PostHog
+- Opt-in analytics, can be disabled in Settings > General
+- No cluster logs, kubeconfig data, or workloads included
+
+**Third-Party Integrations:**
+- AI features connect to OpenRouter and related providers
+- Data sharing governed by provider terms and policies
+- Agentkube does not log, store, or reuse requests/responses
+
+**Subscriptions & Payments:**
+- Premium features require valid subscription
+- Billing through third-party payment processors
+- Fees are non-refundable except where required by law
+- Access terminates if subscription lapses
+
+## Changelog
+
+### Pre-Release v0.6 - Sept. 20, 2025
+
+**New Features & Fixes:**
+- Investigation Tasks: Beta agents automatically investigate issues in background
+- Recon Mode: Read-only access for safe exploration and auditing
+- Out-of-the-Box Plugins: Preloaded OpenCost, Trivy, Kubernetes Linting
+- Deep Tool Integrations: Native integrations with monitoring and security tools
+- MCP Marketplace: Built-in marketplace for easy plug-and-play usage
+- Context Settings for Agents: Fine-tune operations with custom rules
+- Workflows with KubeSpotlight: Spotlight-driven cluster navigation
+- Custom LLM API Keys: Bring your own keys for OpenAI, Anthropic, Google, Azure, AWS
+- Enhanced Authentication: Browser-based authentication mechanism
+- Telemetry Panel: CPU, Memory, Disk, Network usage metrics
+- Minimal Monitoring: kube-prometheus-stack support
+
+### Release v0.4 - May 28, 2025
+- PromQL Spotlight: Query Prometheus metrics from spotlight interface
+- Latest Anthropic Models: claude-sonnet-4 and claude-opus-4 support
+- Context Memory: Added context memory to AI agent for conversation continuity
+
+### Release v0.3 - May 25, 2025
+- MCP Server Management: Switch between MCP servers through Kube Spotlight
+- MCP Server Toggle: Enable/disable functionality for MCP servers
+- Agent Response Streaming: Fixed stream close handling issues
+
+### Release v0.2 - May 15, 2025
+- KubeSpotlight Tab Completion: Kubernetes shortcuts on tab press
+- License Key Handling: Fixed error handling for reactivation scenarios
+- Context Switcher: Kubernetes Context switching from spotlight
+
+### Release v0.1 - May 9, 2025
+- Windows Support Expanded: Full support for Windows x64, x86, ARM
+- Terminal Fixes for Windows: Resolved compatibility issues
+- Collapsible Sidebar Shortcut: Toggle sidebar for improved navigation
+- KubeSpotlight Shortcut Fix: Fixed shortcut inconsistency
+
+### Release v0.0 - May 3, 2025
+- Desktop IDE: Transitioned from web to desktop IDE built with Rust
+- Talk to Cluster: Interact with Kubernetes clusters through AI agent
+- Model Context Protocol (MCP) Support: Connect IDE with external tools
+- Multiple MCP Servers: Connect with multiple MCP servers simultaneously
+- LLM Model Comparison: Evaluate and compare different language models
+- OpenCost Plugin: Cost monitoring and optimization support
+- Trivy Vulnerability Scan: Enhanced security assessments
+- User Subscription Fixes: Individual and team plans support

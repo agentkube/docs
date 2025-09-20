@@ -1,0 +1,42 @@
+# Agentkube Documentation
+
+AI-powered Kubernetes Management IDE for Developers and DevOps Teams
+
+## Getting Started
+- [Introduction](https://docs.agentkube.com/introduction): Overview of Agentkube, an AI-powered Kubernetes management IDE
+- [Set Up](https://docs.agentkube.com/setup): Download and installation guide with platform-specific instructions
+
+## Features
+- [Investigation](https://docs.agentkube.com/features/investigation): AI agents automatically investigate cluster issues and analyze root causes
+- [Editor](https://docs.agentkube.com/features/editor): Text editor for Kubernetes manifest files with security scanning and diff features
+- [Recon Mode](https://docs.agentkube.com/features/recon-mode): Read-only access mode for safe exploration and auditing
+- [Resource Canvas](https://docs.agentkube.com/features/resource-canvas): Interactive resource mapping and dependency visualization
+- [Monitoring](https://docs.agentkube.com/features/monitoring): Kubernetes resource monitoring capabilities
+- [Image Scan](https://docs.agentkube.com/features/image-scan): Container image vulnerability scanning with Trivy integration
+
+## Chat Features
+- [Side Chat](https://docs.agentkube.com/chat/side-chat): AI assistant interface for cluster management and troubleshooting
+- [Inline Chat](https://docs.agentkube.com/chat/inline-chat): Add context to conversations from editors and log viewers
+
+## Agents
+- [Overview](https://docs.agentkube.com/agents/overview): Introduction to AI agents and their capabilities
+- [Tools - Builtin](https://docs.agentkube.com/agents/tools-builtin): Built-in tools including File System, Terminal, Kubectl, and Helm
+- [Tools - Extended](https://docs.agentkube.com/agents/tools-extended): Extended tools for monitoring, security, and observability integrations
+- [MCP](https://docs.agentkube.com/agents/mcp): Model Context Protocol configuration and usage
+- [Marketplace](https://docs.agentkube.com/agents/marketplace): Curated MCP servers marketplace for easy plugin installation
+- [Context](https://docs.agentkube.com/agents/context): Agent context management and resource filtering
+- [Rules](https://docs.agentkube.com/agents/rules): Custom rules for agent operations and governance
+
+## IDE Settings
+- [MCP](https://docs.agentkube.com/settings/mcp): MCP server configuration and management
+- [Watcher](https://docs.agentkube.com/settings/watcher): File and resource watching configuration
+- [Analytics](https://docs.agentkube.com/settings/analytics): Usage analytics and telemetry settings
+- [Account](https://docs.agentkube.com/settings/account): User authentication and subscription management
+- [Custom API](https://docs.agentkube.com/settings/custom-api): Custom LLM API key configuration
+- [Additional Config](https://docs.agentkube.com/settings/additional-config): Extended configuration options
+
+## Help & Resources
+- [Changelog](https://docs.agentkube.com/changelog): Latest updates and version history
+- [Privacy Policy](https://docs.agentkube.com/privacy): Data collection and privacy practices
+- [Terms of Service](https://docs.agentkube.com/terms-of-services): Terms and conditions for using Agentkube
+- [System Status](https://docs.agentkube.com/system-status): Current system status and service availability
