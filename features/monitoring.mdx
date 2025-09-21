@@ -1,15 +1,36 @@
 ---
 title: 'Monitoring'
-description: 'Kubernetes resource monitoring in Agentkube'
 ---
 
-<Note>
-Documentation still under process
-</Note>
+Agentkube provides comprehensive Kubernetes resource monitoring capabilities through integration with the kube-prometheus-stack. Monitor your cluster's health, performance metrics, and resource utilization in real-time.
 
 <Frame caption="Monitoring overview dashboard">
   <img src="/images/monitor-overiew.png" alt="Monitoring dashboard showing cluster metrics and performance data" />
 </Frame>
+
+## Prerequisites
+
+Monitoring in Agentkube currently requires the **kube-prometheus-stack** to be installed in your cluster. This stack provides Prometheus for metrics collection and Grafana for visualization.
+
+<Note>
+Support for other observability providers is planned for future releases.
+</Note>
+
+## Configuration
+
+To enable monitoring in Agentkube, you need to configure the Prometheus service connection:
+
+### Setting up Prometheus Connection
+
+1. **Open Monitoring Page** - Navigate to the Monitoring section in Agentkube
+2. **Access Settings** - Click the settings icon in the top right corner of the monitoring page
+3. **Configure Prometheus** - Provide the following required information:
+   - **Prometheus Service Address**: The URL endpoint of your Prometheus service
+   - **Namespace**: The Kubernetes namespace where Prometheus is deployed
+
+<Note>
+Make sure your Prometheus service is accessible from Agentkube and that the service address is correctly formatted (e.g., `prometheus-server:9090`).
+</Note>
 
 <Frame caption="Resource monitoring interface">
   <img src="/images/monitoring.png" alt="Resource monitoring interface displaying detailed metrics and analytics" />
