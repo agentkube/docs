@@ -4,6 +4,8 @@ title: "Set Up"
 
 To get started, please ensure that your device meets the requirements, click the download link, and follow the instructions to install and run Agentkube.
 
+
+
 export const DownloadButton = ({ platform }) => {
   const [downloadUrl, setDownloadUrl] = useState('')
   const [loading, setLoading] = useState(true)
@@ -12,6 +14,7 @@ export const DownloadButton = ({ platform }) => {
   useEffect(() => {
     // Need to update current version 
     const CURRENT_VERSION = 'v0.0.6'
+    
     
     const getDownloadUrls = (version) => {
       const versionWithoutV = version.replace('v', '')
@@ -49,7 +52,7 @@ export const DownloadButton = ({ platform }) => {
   }
 
   return (
-    <div className="mt-4">
+    <div className="">
       <a
         href={downloadUrl}
         className="inline-flex items-center justify-center px-6 py-2 bg-neutral-800 text-neutral-800 text-sm font-medium rounded-lg hover:bg-neutral-900 border-none transition-colors"
@@ -58,36 +61,33 @@ export const DownloadButton = ({ platform }) => {
         Download for {getPlatformName(platform)}
       </a>
       {version && (
-        <p className="text-sm text-neutral-500 mt-2">Version: {version}</p>
+        <p className="text-sm text-neutral-500 mt-2">{version}</p>
       )}
     </div>
   )
 }
 
 <Tabs>
-<Tab title="Mac Intel">
+<Tab title="Mac">
 **Minimum OS Version:** macOS 10.14
 
-<DownloadButton platform="mac-intel" />
+<div className="flex gap-2">
+  <DownloadButton platform="mac-arm" />
+  <DownloadButton platform="mac-intel" />
+</div>
 </Tab>
 
-<Tab title="Mac ARM">
-**Minimum OS Version:** macOS 11.0
 
-<DownloadButton platform="mac-arm" />
-</Tab>
-
-<Tab title="Windows 64-bit">
+<Tab title="Windows">
 **Minimum OS Version:** Windows 10
 
+<div className="flex gap-2">
 <DownloadButton platform="windows-64" />
-</Tab>
-
-<Tab title="Windows 32-bit">
-**Minimum OS Version:** Windows 10
 
 <DownloadButton platform="windows-32" />
+</div>
 </Tab>
+
 
 <Tab title="Linux">
 
