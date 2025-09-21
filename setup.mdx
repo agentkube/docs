@@ -2,19 +2,13 @@
 title: "Set Up"
 ---
 
-To get started, please ensure that your device meets the requirements, click the download link, and follow the instructions to install and run Agentkube.
-
-
-
 export const DownloadButton = ({ platform }) => {
   const [downloadUrl, setDownloadUrl] = useState('')
   const [loading, setLoading] = useState(true)
   const [version, setVersion] = useState('')
 
   useEffect(() => {
-    // Need to update current version 
     const CURRENT_VERSION = 'v0.0.6'
-    
     
     const getDownloadUrls = (version) => {
       const versionWithoutV = version.replace('v', '')
@@ -55,7 +49,7 @@ export const DownloadButton = ({ platform }) => {
     <div className="">
       <a
         href={downloadUrl}
-        className="inline-flex items-center justify-center px-6 py-2 bg-neutral-800 text-neutral-800 text-sm font-medium rounded-lg hover:bg-neutral-900 border-none transition-colors"
+        className="inline-flex items-center justify-center px-6 py-2 bg-neutral-800 text-white text-sm font-medium rounded-lg hover:bg-neutral-900 border-none transition-colors"
         download
       >
         Download for {getPlatformName(platform)}
@@ -66,6 +60,8 @@ export const DownloadButton = ({ platform }) => {
     </div>
   )
 }
+
+To get started, please ensure that your device meets the requirements, click the download link, and follow the instructions to install and run Agentkube.
 
 <Tabs>
 <Tab title="Mac">
