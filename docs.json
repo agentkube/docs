@@ -112,10 +112,10 @@
             "group": "Help & Resources",
             "pages": [
               "changelog",
+              "resources/troubleshooting",
               "privacy",
               "terms-of-services",
-              "system-status",
-              "resources/troubleshooting"
+              "system-status"
             ]
           }
         ]
