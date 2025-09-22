@@ -1,0 +1,83 @@
+---
+title: 'Troubleshooting'
+---
+
+# Troubleshooting Guide
+
+Agentkube issues can stem from network connectivity, app data, or system problems. Try these troubleshooting steps.
+
+- [Reporting an Issue](#reporting-an-issue): Steps to report an issue to the Agentkube team
+
+## Troubleshooting
+
+<Steps>
+  <Step title="Check authentication status">
+    Authentication issues can prevent Agentkube from accessing its services.
+
+    **Verify authentication:** Go to `Settings` > `Account` and ensure you're signed in. If the page keeps loading, right-click and reload it once.
+
+    **Re-authenticate:** If authentication fails, sign out and sign back in to refresh your session.
+  </Step>
+
+  <Step title="Clear app data">
+    This deletes your app data, including settings, themes, and installation-related data. Export your profile first to preserve this data.
+
+    Agentkube stores app data outside the app for restoration between updates and reinstallations.
+
+    **Windows:** Run these commands in Command Prompt:
+    ```
+    rd /s /q "%USERPROFILE%\AppData\Local\Programs\Agentkube"
+    rd /s /q "%USERPROFILE%\AppData\Local\platform.agentkube.app"
+    rd /s /q "%USERPROFILE%\AppData\Roaming\platform.agentkube.app"
+    del /f /q "%USERPROFILE%\.agentkube*"
+    rd /s /q "%USERPROFILE%\.agentkube"
+    ```
+
+    **MacOS:** Run `sudo rm -rf ~/Library/Application\ Support/platform.agentkube.app` and `rm -f ~/.agentkube.json` in Terminal.
+
+    **Linux:** Run `rm -rf ~/.agentkube ~/.config/platform.agentkube.app/` in Terminal.
+  </Step>
+
+  <Step title="Uninstall Agentkube">
+    **Windows:** Search "Add or Remove Programs" in Start Menu, find "Agentkube", click "Uninstall".
+
+    **MacOS:** Open Applications folder, right-click "Agentkube", select "Move to Trash".
+
+    **Linux:** 
+    - For .deb packages: `sudo apt remove agentkube`
+    - For .rpm packages: `sudo dnf remove agentkube` or `sudo yum remove agentkube`
+    - For AppImage: Delete the Agentkube.appimage file from its location.
+  </Step>
+
+  <Step title="Reinstall Agentkube">
+    Reinstall from the Downloads page. Without cleared app data, Agentkube restores to its previous state. Otherwise, you get a fresh install.
+  </Step>
+</Steps>
+
+## Accessing Logs
+
+Agentkube logs can help diagnose issues. The logs are located at:
+
+**MacOS:** `~/Library/Logs/platform.agentkube.app/`
+
+**Windows:** `%APPDATA%/platform.agentkube.app/logs/`
+
+**Linux:** `~/.config/platform.agentkube.app/logs/`
+
+The binary logs include:
+- `orchestrator.log` and `orchestrator-error.log`
+- `operator.log` and `operator-error.log`
+
+## Reporting an Issue
+
+If these steps don't help, report an issue on [GitHub Issues](https://github.com/agentkube/agentkube/issues).
+
+For quick resolution, provide:
+
+**Screenshot of Issue:** Capture a screenshot, redact sensitive information.
+
+**Steps to Reproduce:** Document exact steps to reproduce the issue.
+
+**System Information:** Get system info from: `Agentkube` > `Settings` > `Updates`
+
+**Logs:** Access logs from the locations mentioned above.
