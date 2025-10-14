@@ -1,6 +1,129 @@
-# Agentkube Documentation
+# Agentkube Website Documentation
 
 AI-powered Kubernetes Management IDE for Developers and DevOps Teams
+
+Website: https://agentkube.com
+
+## About Agentkube
+
+Agentkube is an AI-powered Kubernetes management IDE that bridges the gap between developers and complex cluster operations. It simplifies Kubernetes adoption by automating cluster management, investigating issues, and providing intelligent solutions through an intuitive interface.
+
+Founded in 2025, Agentkube was built for modern ops leaders to reimagine how developers and DevOps teams interact with Kubernetes, making it simpler, more intelligent, and accessible to everyone.
+
+### Our Mission
+We're rebuilding the Kubernetes experience from the ground up with intelligent agents that help developers move faster, operate smarter, and focus on what matters. We believe building great software shouldn't come at the cost of managing infrastructure.
+
+## Alternative to Tools to Agentkube
+
+Agentkube serves as a modern alternative to traditional Kubernetes management tools like Lens, Headlamp, and k9s, offering AI-powered capabilities and intelligent automation that goes beyond basic cluster visualization and management.
+
+## Key Features
+
+### 1. Modern K8s Management
+- **Seamless Context Switching**: Navigate your entire multi-cluster environment without overhead. Instantly move between contexts with Spotlight and keep your workflow fluid.
+- **Natural Language Interface**: Talk to your cluster in natural language. Forget memorizing commands - describe what you want and Agentkube handles the rest.
+- **MCP Server Integration**: Extend Agent intelligence with Model Context Protocol (MCP) servers. Connect GitHub, databases, Slack, or Kubernetes APIs.
+
+### 2. AI-Powered Features
+- **AI-Powered Debugging**: Investigate issues faster. Agentkube analyzes cluster behavior and helps resolve incidents automatically.
+- **Agent-Based Automation**: Run custom policies & workflows. Define playbooks and agents to respond to events, enforce security, and optimize cost.
+- **Cluster Linting**: Scan & catch misconfigurations. Use in-built cluster linting to detect misconfigurations, stale resources, and violations of best practices.
+
+### 3. Enhanced Productivity
+- Experience your clusters, reimagined
+- Manage clusters faster and with less effort
+- Explore resources, troubleshoot issues, and automate common tasks
+- All in one simple, responsive desktop interface
+
+## Pricing Plans
+
+### Free Plan - $0/month
+- Unlimited cluster connections
+- 3 investigation requests/month
+- 30 prompt credits/month (across leading models: OpenAI, Claude, Gemini, xAI, and more)
+- All premium models
+- Basic monitoring & telemetry
+- Slower vulnerability scans
+- MCP (Model Context Protocol) Support
+- 2 provision requests (Coming Soon)
+
+### Developer Plan - $10/month (30% off first month: $7)
+- Unlimited cluster connections
+- 50 investigation requests/month
+- 250 prompt credits/month (across leading models)
+- All premium models
+- MCP Support
+- BYOK (Bring your own key)
+- $0.5 per provisioning request (Coming Soon)
+
+### Startup Plan - $49/user/month
+- Unlimited cluster connections
+- 150 investigation requests/month
+- 2500 prompt credits/month (across leading models)
+- All premium models
+- MCP Support
+- BYOK (Bring your own key)
+- $0.5 per provisioning request (Coming Soon)
+
+### Enterprise Plan - Contact us
+- Unlimited cluster connections
+- Unlimited provision
+- Highest priority support
+- Volume-based annual discounts
+- Role-Based Access Control (RBAC)
+- BYOM and BYOK
+- Account management
+
+## Download Options
+- Mac Intel (macOS 10.14+)
+- Mac ARM (macOS 11.0+)
+- Windows 64-bit (Windows 10+)
+- Windows 32-bit (Windows 10+)
+- Linux support coming soon
+
+## Company Information
+
+### Privacy & Data Handling
+**Local Data Storage**: Kubernetes cluster configurations, workloads, and logs remain on your local system. Agentkube does not transmit or store cluster data, kubeconfig files, or workload logs on our servers.
+
+**Account Data**: We collect name, email address, and authentication credentials. Subscription and billing details are handled securely by payment processors (e.g., Lemon Squeezy).
+
+**Optional Analytics**: Anonymous usage metrics via third-party tools like PostHog. Can be disabled anytime in Settings > General.
+
+**AI Integrations**: Connects to OpenRouter and related providers for AI features. Agentkube does not log, store, or reuse your AI queries or responses.
+
+## Website Structure
+
+The website includes the following main sections:
+- **Home/Landing**: Main product introduction and features
+- **Product**: Detailed information about Agents, Workflow, Observability, and Provisioning
+- **Pricing**: Detailed pricing plans and comparisons
+- **Resources**: Documentation, blogs, changelog
+- **About**: Company information, mission, team
+- **Support**: Contact, FAQs, community Discord
+
+### Navigation Sections
+- **Product**: Features Agents, Workflow, Observability (Coming Soon), Provisioning (Coming Soon)
+- **Resources**: Documentation, Blogs, Changelog, with latest blog posts preview
+- **About**: About Us, Contact, Discord Community, with company policies
+
+## Contact Information
+- Email: info@agentkube.com
+- Discord Community: https://discord.gg/wzCnv1222
+- Documentation: https://docs.agentkube.com
+- Account Management: https://account.agentkube.com
+- Status Page: https://status.agentkube.com
+
+## Social Media & Links
+- Twitter/X: https://x.com/agentkube
+- GitHub: https://github.com/agentkube
+- LinkedIn: https://www.linkedin.com/company/agentkube
+- Crunchbase: https://www.crunchbase.com/organization/agentkube
+- Discord: https://discord.gg/wzCnv1222
+
+
+## Company Vision
+AI isn't here to replace operators, it's here to elevate them. Together, human + agent can ship faster, operate smarter, and innovate without limits. We envision a future where engineers won't be bogged down by tooling, they'll lead fleets of agents, making decisions, not running commands.
 
 ## Getting Started
 - [Introduction](https://docs.agentkube.com/introduction): Overview of Agentkube, an AI-powered Kubernetes management IDE
