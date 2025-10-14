@@ -114,12 +114,14 @@ The website includes the following main sections:
 - Account Management: https://account.agentkube.com
 - Status Page: https://status.agentkube.com
 
+
 ## Social Media & Links
 - Twitter/X: https://x.com/agentkube
 - GitHub: https://github.com/agentkube
 - LinkedIn: https://www.linkedin.com/company/agentkube
 - Crunchbase: https://www.crunchbase.com/organization/agentkube
-- Discord: https://discord.gg/wzCnv1222
+- Discord: https://discord.gg/UxnwzcjMWA
+- Youtube: https://www.youtube.com/@agentkube
 
 
 ## Company Vision
