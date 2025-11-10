@@ -1,6 +1,6 @@
 # Agentkube Website Documentation
 
-AI-powered Kubernetes Management IDE for Developers and DevOps Teams
+AI-powered Kubernetes IDE for Developers and DevOps Teams
 
 Website: https://agentkube.com
 
