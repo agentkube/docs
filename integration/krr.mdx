@@ -1,0 +1,92 @@
+---
+title: 'Resource Recommendations'
+---
+
+The Resource Recommender feature in Agentkube IDE provides intelligent CPU and memory resource recommendations for your Kubernetes workloads. This built-in feature analyzes historical usage patterns to suggest optimal resource requests and limits, helping you right-size your containers and improve cluster efficiency.
+
+By analyzing usage data collected from Prometheus metrics, the Resource Recommender ensures your resource allocations match actual workload requirements, preventing both over-provisioning and resource contention.
+
+## How to Use
+
+<Frame caption="Resource Recommendations in Agentkube IDE">
+  <img src="/images/krr.png" alt="Resource recommendations showing CPU and memory suggestions for Kubernetes pods" />
+</Frame>
+
+## Prerequisites
+
+To use the Resource Recommender feature, ensure:
+
+- Prometheus is integrated with Agentkube IDE
+- Prometheus is scraping cAdvisor metrics for container resource usage
+- kube-state-metrics is deployed for Kubernetes object metadata
+- Metric retention period covers at least 14 days for optimal recommendations
+- Scrape interval is configured appropriately (typically 15-30 seconds)
+
+
+To access resource recommendations in Agentkube IDE:
+
+1. Navigate to the **Workloads** section
+2. Select **Pods** from the workload types
+3. Click on the **Action** button for the desired pod
+4. Select **Telemetry** from the dropdown menu
+5. Navigate to the **Recommendation** tab
+6. View CPU and memory recommendations based on historical data
+
+## Recommendation Strategy
+
+Agentkube implements an intelligent recommendation strategy that balances resource efficiency with workload stability.
+
+### CPU Recommendations
+
+**Request Calculation:**
+- Based on the **95th percentile** of historical CPU usage
+- Allows pods to burst above the request when needed
+- No CPU limit is set by default to permit bursting
+
+**Required Metric:** `container_cpu_usage_seconds_total`
+
+### Memory Recommendations
+
+**Request/Limit Calculation:**
+- Based on **peak memory usage** over the historical period
+- Adds a **15% buffer** to prevent OOM kills
+- Sets both request and limit to the same value for predictability
+
+**Required Metric:** `container_memory_working_set_bytes`
+
+## Data Requirements
+
+The Resource Recommender requires **100+ historical datapoints** to generate reliable recommendations. By default, it analyzes **14 days** of historical data to capture regular usage patterns, peak load scenarios, and daily/weekly cycles.
+
+## Metrics Used
+
+The Resource Recommender leverages the following Prometheus metrics for analysis:
+
+### Core Metrics
+
+| Metric | Purpose | Description |
+|--------|---------|-------------|
+| `container_cpu_usage_seconds_total` | CPU Usage | Total CPU time consumed by containers |
+| `container_memory_working_set_bytes` | Memory Usage | Current memory usage including cache but excluding reclaimable memory |
+
+### Supporting Metrics
+
+| Metric | Purpose | Description |
+|--------|---------|-------------|
+| `kube_pod_container_resource_limits` | Resource Limits | Configured resource limits for containers |
+| `kube_pod_container_status_last_terminated_reason` | OOM Detection | Identifies OOMKilled events for memory analysis |
+| `kube_replicaset_owner` | Pod Identification | Maps pods to their parent resources |
+| `kube_pod_owner` | Pod Identification | Identifies pod controllers |
+| `kube_pod_status_phase` | Pod Status | Current phase of pod lifecycle |
+
+## OOM Kill Detection
+
+When Out-Of-Memory (OOM) kill events are detected, the Resource Recommender automatically adjusts recommendations:
+
+- Applies a **25% memory buffer** (instead of 15%)
+- Considers historical memory limits that were exceeded
+- Helps prevent future OOM kills
+
+**Required Metrics:**
+- `kube_pod_container_resource_limits`
+- `kube_pod_container_status_last_terminated_reason`

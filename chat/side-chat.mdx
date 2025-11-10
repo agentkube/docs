@@ -15,6 +15,30 @@ After entering Agentkube, you can open the AI panel on the right side using the 
 
 Agentkube offers a range of functionalities that you can use during chat, enabling you to manage your clusters more efficiently.
 
+### Human-in-the-Loop
+
+Agentkube provides Human-in-the-Loop (HITL) functionality, giving you control over agent actions before they execute. This ensures that sensitive operations require your explicit approval, increasing trust and safety when working with AI agents.
+
+<Frame caption="Tool call permission dialog in Ask before edit mode">
+  <img src="/images/hitl.jpg" alt="Permission dialog showing tool call approval options with Allow, Allow Always, and Deny buttons" />
+</Frame>
+
+**Approval Modes:**
+
+- **Ask Before Edit**: Requests permission for every tool usage. The agent will pause and ask for your approval before executing any action
+- **Auto Approve**: Grants permission for all tool calls. The agent can execute actions without interruption
+
+**Permission Dialog:**
+
+When in "Ask Before Edit" mode, a tool permission dialog appears for each action with the following options:
+
+- **Allow**: Approve this specific tool call and execute it once
+- **Allow Always**: Approve all tool calls for the current chat session
+- **Deny**: Reject the tool call and prevent execution
+- **Input Message**: Provide feedback or instructions to change what the agent should do instead
+
+This workflow allows you to review tool calls, modify agent behavior on the fly, and maintain control over what actions are performed in your cluster.
+
 ### Models
 
 Agentkube provides a series of outstanding AI models in the industry. You can easily switch between different models for use. In addition, Agentkube supports adding custom models through your own API keys to better meet your personalized needs.

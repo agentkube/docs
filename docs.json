@@ -75,6 +75,13 @@
                   "chat/side-chat",
                   "chat/inline-chat"
                 ]
+              },
+              {
+                "group": "Integrations",
+                "pages": [
+                  "integration/argocd",
+                  "integration/krr"
+                ]
               }
             ]
           },
