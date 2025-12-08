@@ -16,7 +16,9 @@ export const DownloadButton = ({ platform }) => {
         'mac-intel': `https://github.com/agentkube/agentkube/releases/download/${version}/Agentkube_${versionWithoutV}_x64.dmg`,
         'mac-arm': `https://github.com/agentkube/agentkube/releases/download/${version}/Agentkube_${versionWithoutV}_aarch64.dmg`,
         'windows-64': `https://github.com/agentkube/agentkube/releases/download/${version}/Agentkube_${versionWithoutV}_x64-setup.exe`,
-        'windows-32': `https://github.com/agentkube/agentkube/releases/download/${version}/Agentkube_${versionWithoutV}_x86-setup.exe`
+        'windows-32': `https://github.com/agentkube/agentkube/releases/download/${version}/Agentkube_${versionWithoutV}_x86-setup.exe`,
+        'linux-deb': `https://github.com/agentkube/agentkube/releases/download/${version}/Agentkube_${versionWithoutV}_amd64.deb`,
+        'linux-rpm': `https://github.com/agentkube/agentkube/releases/download/${version}/Agentkube-${versionWithoutV}-1.x86_64.rpm`
       }
     }
     
@@ -31,7 +33,9 @@ export const DownloadButton = ({ platform }) => {
       'mac-intel': 'Mac Intel',
       'mac-arm': 'Mac ARM',
       'windows-64': 'Windows 64-bit',
-      'windows-32': 'Windows 32-bit'
+      'windows-32': 'Windows 32-bit',
+      'linux-deb': 'Linux (DEB)',
+      'linux-rpm': 'Linux (RPM)'
     }
     return names[platform] || platform
   }
@@ -87,8 +91,16 @@ To get started, please ensure that your device meets the requirements, click the
 
 
 <Tab title="Linux">
+**Minimum OS Version:** Most modern Linux distributions (AMD64 only)
 
-Linux support is yet to be provided
+<div className="flex gap-2">
+  <DownloadButton platform="linux-deb" />
+  <DownloadButton platform="linux-rpm" />
+</div>
+
+<Note>
+**ARM64 Support:** Linux ARM64 support is coming soon.
+</Note>
 
 </Tab>
 </Tabs>
