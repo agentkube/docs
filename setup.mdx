@@ -8,7 +8,7 @@ export const DownloadButton = ({ platform }) => {
   const [version, setVersion] = useState('')
 
   useEffect(() => {
-    const CURRENT_VERSION = 'v0.0.11'
+    const CURRENT_VERSION = 'v0.0.12'
     
     const getDownloadUrls = (version) => {
       const versionWithoutV = version.replace('v', '')
@@ -91,16 +91,12 @@ To get started, please ensure that your device meets the requirements, click the
 
 
 <Tab title="Linux">
-**Minimum OS Version:** Most modern Linux distributions (AMD64 only)
+**Minimum OS Version:** Most modern Linux distributions
 
 <div className="flex gap-2">
   <DownloadButton platform="linux-deb" />
   <DownloadButton platform="linux-rpm" />
 </div>
-
-<Note>
-**ARM64 Support:** Linux ARM64 support is coming soon.
-</Note>
 
 </Tab>
 </Tabs>
